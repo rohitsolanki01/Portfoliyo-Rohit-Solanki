@@ -52,7 +52,7 @@ export default function Hero() {
                 className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold bg-primary text-primary-foreground shadow-md hover:shadow-lg transition-all text-sm">
                 Get in Touch
               </motion.button>
-              <motion.a whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} href="#"
+              <motion.a whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} href="https://d8it4huxumps7.cloudfront.net/uploads/attachements/user-resumes/6996b7df96be1_Rohit_Solanki_Full_Stack_Developer.pdf" target="_blank" rel="noopener noreferrer"
                 className="group px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold border border-border hover:border-primary/40 text-muted-foreground hover:text-foreground transition-all flex items-center gap-2 text-sm">
                 <HiDownload size={16} /> Resume
               </motion.a>

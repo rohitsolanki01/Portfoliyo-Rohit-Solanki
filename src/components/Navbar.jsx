@@ -10,6 +10,8 @@ const navLinks = [
   { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
   { name: 'Journey', href: '#journey' },
+  { name: 'Certifications', href: '#certifications' },
+  { name: 'Testimonials', href: '#testimonials' },
   { name: 'GitHub', href: '#github' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -52,18 +54,18 @@ export default function Navbar({ darkMode, setDarkMode }) {
             : 'py-4 bg-transparent'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-<a href="#home" onClick={(e) => { e.preventDefault(); scrollTo('#home'); }}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+          <a href="#home" onClick={(e) => { e.preventDefault(); scrollTo('#home'); }}
             className="text-xl font-bold font-[Outfit] tracking-tight flex items-center gap-2">
             <Logo size={28} />
-            <span className="text-foreground"></span>
           </a>
-<div className="hidden md:flex items-center gap-1">
+
+          <div className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollTo(link.href)}
-                className={`relative px-3.5 py-2 text-[13px] font-medium rounded-lg transition-colors ${
+                className={`relative px-2.5 py-2 text-[11px] font-medium rounded-lg transition-colors ${
                   activeSection === link.href.slice(1)
                     ? 'text-primary'
                     : 'text-muted-foreground hover:text-foreground'
@@ -78,7 +80,8 @@ export default function Navbar({ darkMode, setDarkMode }) {
               </button>
             ))}
           </div>
-<div className="flex items-center gap-2">
+
+          <div className="flex items-center gap-2">
             <motion.button
               whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               onClick={() => setDarkMode(!darkMode)}
@@ -99,18 +102,19 @@ export default function Navbar({ darkMode, setDarkMode }) {
             </motion.button>
 
             <button onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-lg bg-secondary/60 hover:bg-secondary text-muted-foreground border border-border/50 transition-colors"
+              className="lg:hidden p-2 rounded-lg bg-secondary/60 hover:bg-secondary text-muted-foreground border border-border/50 transition-colors"
               aria-label="Menu">
               {mobileOpen ? <HiX size={18} /> : <HiMenuAlt3 size={18} />}
             </button>
           </div>
         </div>
       </motion.nav>
-<AnimatePresence>
+
+      <AnimatePresence>
         {mobileOpen && (
           <>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden" onClick={() => setMobileOpen(false)} />
-            <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }} className="fixed top-0 right-0 h-full w-64 z-50 bg-card/95 backdrop-blur-xl border-l border-border md:hidden">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden" onClick={() => setMobileOpen(false)} />
+            <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', stiffness: 300, damping: 30 }} className="fixed top-0 right-0 h-full w-64 z-50 bg-card/95 backdrop-blur-xl border-l border-border lg:hidden">
               <div className="p-6 pt-20 flex flex-col gap-1">
                 {navLinks.map((link, i) => (
                   <motion.button key={link.name} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.04 }}

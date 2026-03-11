@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiSend, FiMail, FiMapPin, FiGithub, FiLinkedin } from 'react-icons/fi';
+import { FiSend, FiMail, FiMapPin, FiGithub, FiLinkedin, FiCheckCircle, FiAlertCircle, FiLoader } from 'react-icons/fi';
 
 const info = [
   { label: 'Location', value: 'India', icon: FiMapPin },
@@ -15,14 +15,37 @@ const socials = [
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form:', form);
-    setSent(true);
-    setForm({ name: '', email: '', message: '' });
-    setTimeout(() => setSent(false), 4000);
+    setStatus('sending');
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/rohitsolanki0473@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          _subject: `Portfolio Contact: ${form.name}`,
+          _template: 'table',
+        }),
+      });
+
+      if (res.ok) {
+        setStatus('sent');
+        setForm({ name: '', email: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+        setTimeout(() => setStatus('idle'), 4000);
+      }
+    } catch {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
+    }
   };
 
   return (
@@ -35,8 +58,8 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12 mt-8 sm:mt-12">
-<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="lg:col-span-2 space-y-4 sm:space-y-6">
-<div className="rounded-xl border border-border/50 bg-card/30 overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="lg:col-span-2 space-y-4 sm:space-y-6">
+            <div className="rounded-xl border border-border/50 bg-card/30 overflow-hidden">
               <table className="w-full">
                 <tbody>
                   {info.map((item) => (
@@ -62,7 +85,8 @@ export default function Contact() {
               ))}
             </div>
           </motion.div>
-<motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="lg:col-span-3">
+
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="lg:col-span-3">
             <form onSubmit={handleSubmit} className="rounded-2xl border border-border/50 bg-card/30 p-5 sm:p-6 md:p-8 space-y-4 sm:space-y-5">
               <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
@@ -85,12 +109,22 @@ export default function Contact() {
                   className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 outline-none text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/40 resize-none transition-all" />
               </div>
               <motion.button type="submit" whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}
-                className="w-full py-2 sm:py-2.5 rounded-lg font-medium bg-primary text-primary-foreground text-xs sm:text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all">
-                <FiSend size={13} /> Send Message
+                disabled={status === 'sending'}
+                className="w-full py-2 sm:py-2.5 rounded-lg font-medium bg-primary text-primary-foreground text-xs sm:text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-60 disabled:cursor-not-allowed">
+                {status === 'sending' ? (
+                  <><FiLoader size={13} className="animate-spin" /> Sending...</>
+                ) : (
+                  <><FiSend size={13} /> Send Message</>
+                )}
               </motion.button>
-              {sent && (
-                <motion.p initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="text-center text-[10px] sm:text-xs text-green-500 font-medium">
-                  ✅ Message sent! I&apos;ll get back to you soon.
+              {status === 'sent' && (
+                <motion.p initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="text-center text-[10px] sm:text-xs text-green-500 font-medium flex items-center justify-center gap-1.5">
+                  <FiCheckCircle size={13} /> Message sent successfully! I&apos;ll get back to you soon.
+                </motion.p>
+              )}
+              {status === 'error' && (
+                <motion.p initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="text-center text-[10px] sm:text-xs text-red-400 font-medium flex items-center justify-center gap-1.5">
+                  <FiAlertCircle size={13} /> Something went wrong. Try emailing me directly.
                 </motion.p>
               )}
             </form>
