@@ -44,7 +44,7 @@ export default function Certifications() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
           <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/60">Achievements</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Outfit] mt-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Sora] mt-2">
             My <span className="gradient-text">Certifications</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground mt-3 max-w-lg">Courses and programs I&apos;ve completed to sharpen my skills.</p>
@@ -59,7 +59,7 @@ export default function Certifications() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ y: -4 }}
-              className="group rounded-2xl border border-border/50 bg-card/30 overflow-hidden hover:border-primary/30 hover:shadow-xl transition-all cursor-pointer"
+              className="group rounded-3xl border border-white/10 bg-card/45 backdrop-blur-xl overflow-hidden hover:border-primary/35 hover:shadow-[0_20px_50px_-24px_rgba(76,191,255,0.5)] transition-all cursor-pointer"
               onClick={() => setLightbox(i)}
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-secondary/20">
@@ -82,7 +82,7 @@ export default function Certifications() {
                     <FiAward size={16} style={{ color: cert.color }} />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="text-sm sm:text-base font-bold font-[Outfit] text-foreground leading-tight">{cert.title}</h3>
+                    <h3 className="text-sm sm:text-base font-bold font-[Sora] text-foreground leading-tight">{cert.title}</h3>
                     <p className="text-xs text-muted-foreground mt-0.5">{cert.issuer}</p>
                   </div>
                 </div>
@@ -93,7 +93,7 @@ export default function Certifications() {
 
                 <div className="flex flex-wrap gap-1 mt-3">
                   {cert.tags.map((tag) => (
-                    <span key={tag} className="px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px] font-medium rounded-md bg-primary/8 text-primary/80 border border-primary/10">
+                    <span key={tag} className="px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px] font-medium rounded-md bg-gradient-to-r from-primary/20 to-accent/20 text-primary border border-white/10">
                       {tag}
                     </span>
                   ))}
@@ -114,7 +114,7 @@ export default function Certifications() {
             onClick={() => setLightbox(null)}
           >
             <motion.button
-              className="absolute top-4 right-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors z-10"
+              className="absolute top-4 right-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 border border-white/20 transition-colors z-10"
               onClick={() => setLightbox(null)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -124,7 +124,7 @@ export default function Certifications() {
 
             {lightbox > 0 && (
               <motion.button
-                className="absolute left-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors z-10"
+                className="absolute left-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 border border-white/20 transition-colors z-10"
                 onClick={(e) => { e.stopPropagation(); navigate(-1); }}
                 whileHover={{ scale: 1.1 }}
               >
@@ -134,7 +134,7 @@ export default function Certifications() {
 
             {lightbox < certifications.length - 1 && (
               <motion.button
-                className="absolute right-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors z-10"
+                className="absolute right-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 border border-white/20 transition-colors z-10"
                 onClick={(e) => { e.stopPropagation(); navigate(1); }}
                 whileHover={{ scale: 1.1 }}
               >

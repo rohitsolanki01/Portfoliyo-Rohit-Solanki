@@ -43,7 +43,7 @@ export default function Testimonials() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
           <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/60">Testimonials</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Outfit] mt-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Sora] mt-2">
             What People <span className="gradient-text">Say</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground mt-3 max-w-lg">Feedback from mentors and industry professionals.</p>
@@ -54,9 +54,9 @@ export default function Testimonials() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-2xl border border-border/50 bg-card/30 p-6 sm:p-8 md:p-10"
+            className="relative rounded-3xl border border-white/10 bg-card/45 backdrop-blur-xl p-6 sm:p-8 md:p-10 shadow-[0_14px_40px_-25px_rgba(0,0,0,0.7)]"
           >
-            <FaQuoteLeft className="absolute top-5 left-5 sm:top-6 sm:left-6 text-primary/10" size={40} />
+            <FaQuoteLeft className="absolute top-5 left-5 sm:top-6 sm:left-6 text-primary/20" size={40} />
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -71,32 +71,32 @@ export default function Testimonials() {
                 </p>
 
                 <div className="flex items-center gap-3 sm:gap-4 mt-6 sm:mt-8">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl border border-border/50" style={{ backgroundColor: `${t.color}15` }}>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl sm:text-2xl border border-white/15" style={{ backgroundColor: `${t.color}20` }}>
                     {t.avatar}
                   </div>
                   <div>
-                    <p className="text-sm sm:text-base font-bold text-foreground font-[Outfit]">{t.name}</p>
+                    <p className="text-sm sm:text-base font-bold text-foreground font-[Sora]">{t.name}</p>
                     <p className="text-[10px] sm:text-xs text-muted-foreground">{t.role} · {t.company}</p>
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
 
-            <div className="flex items-center justify-between mt-6 sm:mt-8 pt-4 sm:pt-5 border-t border-border/30">
+            <div className="flex items-center justify-between mt-6 sm:mt-8 pt-4 sm:pt-5 border-t border-white/10">
               <div className="flex gap-1.5">
                 {testimonials.map((_, i) => (
                   <button key={i} onClick={() => setCurrent(i)}
-                    className={`w-2 h-2 rounded-full transition-all ${i === current ? 'bg-primary w-6' : 'bg-border hover:bg-muted-foreground/30'}`} />
+                    className={`w-2 h-2 rounded-full transition-all ${i === current ? 'bg-gradient-to-r from-primary to-accent w-6' : 'bg-border hover:bg-muted-foreground/30'}`} />
                 ))}
               </div>
 
               <div className="flex gap-2">
                 <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={prev}
-                  className="p-2 rounded-lg border border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 transition-colors">
+                  className="p-2 rounded-lg border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground hover:border-primary/35 transition-colors">
                   <FiChevronLeft size={16} />
                 </motion.button>
                 <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={next}
-                  className="p-2 rounded-lg border border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/30 transition-colors">
+                  className="p-2 rounded-lg border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground hover:border-primary/35 transition-colors">
                   <FiChevronRight size={16} />
                 </motion.button>
               </div>

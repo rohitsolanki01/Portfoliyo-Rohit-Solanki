@@ -53,17 +53,17 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
           <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/60">Contact</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Outfit] mt-2">Get in <span className="gradient-text">Touch</span></h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Sora] mt-2">Get in <span className="gradient-text">Touch</span></h2>
           <p className="text-sm sm:text-base text-muted-foreground mt-3 max-w-lg">Have a project in mind? Let&apos;s work together.</p>
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12 mt-8 sm:mt-12">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="lg:col-span-2 space-y-4 sm:space-y-6">
-            <div className="rounded-xl border border-border/50 bg-card/30 overflow-hidden">
+            <div className="rounded-2xl border border-white/10 bg-card/45 backdrop-blur-xl overflow-hidden shadow-[0_14px_40px_-25px_rgba(0,0,0,0.7)]">
               <table className="w-full">
                 <tbody>
                   {info.map((item) => (
-                    <tr key={item.label} className="border-b border-border/30 last:border-0">
+                    <tr key={item.label} className="border-b border-white/10 last:border-0">
                       <td className="px-4 sm:px-5 py-3 sm:py-3.5 text-xs sm:text-sm text-muted-foreground">{item.label}</td>
                       <td className="px-4 sm:px-5 py-3 sm:py-3.5 text-xs sm:text-sm text-foreground font-medium">
                         {item.href ? <a href={item.href} className="text-primary hover:underline break-all">{item.value}</a> : item.value}
@@ -79,7 +79,7 @@ export default function Contact() {
             <div className="flex gap-2">
               {socials.map((s) => (
                 <motion.a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.9 }}
-                  className="p-2 sm:p-2.5 rounded-lg border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/30 transition-all" aria-label={s.label}>
+                  className="p-2 sm:p-2.5 rounded-xl border border-white/10 bg-white/5 text-muted-foreground hover:text-primary hover:border-primary/35 transition-all" aria-label={s.label}>
                   <s.icon size={16} />
                 </motion.a>
               ))}
@@ -87,17 +87,17 @@ export default function Contact() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="lg:col-span-3">
-            <form onSubmit={handleSubmit} className="rounded-2xl border border-border/50 bg-card/30 p-5 sm:p-6 md:p-8 space-y-4 sm:space-y-5">
+            <form onSubmit={handleSubmit} className="rounded-3xl border border-white/10 bg-card/45 backdrop-blur-xl p-5 sm:p-6 md:p-8 space-y-4 sm:space-y-5 shadow-[0_14px_40px_-25px_rgba(0,0,0,0.7)]">
               <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label className="text-[10px] sm:text-xs font-medium text-muted-foreground mb-1 sm:mb-1.5 block">Name</label>
                   <input type="text" required value={form.name} onChange={e => setForm({...form, name: e.target.value})} placeholder="Your name"
-                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 outline-none text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/40 transition-all" />
+                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-background/40 border border-white/12 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 outline-none text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/40 transition-all" />
                 </div>
                 <div>
                   <label className="text-[10px] sm:text-xs font-medium text-muted-foreground mb-1 sm:mb-1.5 block">Email</label>
                   <input type="email" required value={form.email} onChange={e => setForm({...form, email: e.target.value})} placeholder="your@email.com"
-                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 outline-none text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/40 transition-all" />
+                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-background/40 border border-white/12 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 outline-none text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/40 transition-all" />
                 </div>
               </div>
               <div>
@@ -106,11 +106,11 @@ export default function Contact() {
                   <span className="text-[9px] sm:text-[10px] text-muted-foreground/50">{form.message.length}/500</span>
                 </div>
                 <textarea required rows={4} maxLength={500} value={form.message} onChange={e => setForm({...form, message: e.target.value})} placeholder="Tell me about your project..."
-                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg bg-background/50 border border-border/50 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 outline-none text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/40 resize-none transition-all" />
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-background/40 border border-white/12 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 outline-none text-xs sm:text-sm text-foreground placeholder:text-muted-foreground/40 resize-none transition-all" />
               </div>
               <motion.button type="submit" whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}
                 disabled={status === 'sending'}
-                className="w-full py-2 sm:py-2.5 rounded-lg font-medium bg-primary text-primary-foreground text-xs sm:text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all disabled:opacity-60 disabled:cursor-not-allowed">
+                className="w-full py-2 sm:py-2.5 rounded-xl font-medium bg-gradient-to-r from-primary to-accent text-primary-foreground text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_12px_45px_-20px_rgba(80,190,255,0.85)] hover:opacity-90 transition-all disabled:opacity-60 disabled:cursor-not-allowed">
                 {status === 'sending' ? (
                   <><FiLoader size={13} className="animate-spin" /> Sending...</>
                 ) : (

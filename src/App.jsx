@@ -43,7 +43,7 @@ function IntroScreen({ onComplete }) {
           animate={{ opacity: 0.15, scale: 1 }}
           transition={{ delay: 0.3, duration: 1.5 }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-60 h-60 rounded-full"
-          style={{ background: 'radial-gradient(circle, oklch(0.68 0.18 275 / 0.5), transparent 65%)' }}
+          style={{ background: 'radial-gradient(circle, oklch(0.73 0.15 215 / 0.55), transparent 65%)' }}
         />
         <motion.div initial={{ opacity: 0, scale: 0.5, rotateY: -30 }} animate={{ opacity: 1, scale: 1, rotateY: 0 }}
           transition={{ duration: 0.7, type: 'spring', stiffness: 180 }}
@@ -57,7 +57,7 @@ function IntroScreen({ onComplete }) {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.6 + i * 0.04, duration: 0.3 }}
-              className="text-xl font-bold font-[Outfit] tracking-tight text-foreground"
+              className="text-xl font-bold font-[Sora] tracking-tight text-foreground"
             >
               {char === ' ' ? '\u00A0' : char}
             </motion.span>
@@ -69,7 +69,7 @@ function IntroScreen({ onComplete }) {
         <motion.div className="mt-6 w-52 h-[2px] bg-border/30 rounded-full mx-auto overflow-hidden"
           initial={{ opacity: 0, scaleX: 0.5 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ delay: 2.0 }}>
           <motion.div className="h-full rounded-full"
-            style={{ background: 'linear-gradient(90deg, oklch(0.68 0.18 275), oklch(0.72 0.16 300), oklch(0.68 0.18 275))' }}
+            style={{ background: 'linear-gradient(90deg, oklch(0.73 0.15 215), oklch(0.78 0.13 160), oklch(0.73 0.15 215))' }}
             initial={{ width: '0%' }} animate={{ width: '100%' }}
             transition={{ delay: 2.2, duration: 1, ease: [0.65, 0, 0.35, 1] }} />
         </motion.div>
@@ -85,7 +85,7 @@ function ScrollProgress() {
     window.addEventListener('scroll', h);
     return () => window.removeEventListener('scroll', h);
   }, []);
-  return <div className="fixed top-0 left-0 right-0 z-[60] h-[2px]"><div className="h-full bg-primary transition-all duration-100" style={{ width: `${p}%` }} /></div>;
+  return <div className="fixed top-0 left-0 right-0 z-[60] h-[2px]"><div className="h-full bg-gradient-to-r from-primary via-accent to-primary transition-all duration-100" style={{ width: `${p}%` }} /></div>;
 }
 
 export default function App() {

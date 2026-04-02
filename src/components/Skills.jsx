@@ -58,7 +58,7 @@ function SkillBar({ skill, delay }) {
           {skill.level}%
         </motion.span>
       </div>
-      <div className="h-1.5 sm:h-2 rounded-full bg-secondary/50 overflow-hidden">
+      <div className="h-1.5 sm:h-2 rounded-full bg-white/10 overflow-hidden">
         <motion.div
           className="h-full rounded-full"
           style={{ background: `linear-gradient(90deg, ${skill.color}CC, ${skill.color})` }}
@@ -78,7 +78,7 @@ export default function Skills() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
           <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/60">Skills</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Outfit] mt-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Sora] mt-2">
             Tech Stack & <span className="gradient-text">Tools</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground mt-3 max-w-lg">Technologies I use to build modern web applications.</p>
@@ -87,7 +87,7 @@ export default function Skills() {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
           {categories.map((cat, ci) => (
             <motion.div key={cat.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: ci * 0.1 }}
-              className="rounded-2xl border border-border/50 bg-card/30 p-4 sm:p-6 hover:border-primary/30 transition-colors">
+              className="rounded-3xl border border-white/10 bg-card/45 backdrop-blur-xl p-4 sm:p-6 hover:border-primary/35 transition-colors shadow-[0_14px_40px_-25px_rgba(0,0,0,0.7)]">
               <h3 className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-muted-foreground/60 mb-5 sm:mb-6">{cat.title}</h3>
               <div className="space-y-4 sm:space-y-5">
                 {cat.skills.map((skill, si) => (

@@ -46,7 +46,7 @@ export default function Blog() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
           <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/60">Blog</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Outfit] mt-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Sora] mt-2">
             Latest <span className="gradient-text">Articles</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground mt-3 max-w-lg">Sharing what I learn along the way.</p>
@@ -61,12 +61,12 @@ export default function Blog() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               whileHover={{ y: -4 }}
-              className="group rounded-2xl border border-border/50 bg-card/30 p-5 sm:p-6 hover:border-primary/30 hover:shadow-xl transition-all cursor-pointer flex flex-col"
+              className="group rounded-3xl border border-white/10 bg-card/45 backdrop-blur-xl p-5 sm:p-6 hover:border-primary/35 hover:shadow-[0_20px_50px_-24px_rgba(76,191,255,0.5)] transition-all cursor-pointer flex flex-col"
             >
               <div className="flex items-start gap-3 mb-3">
                 <span className="text-2xl sm:text-3xl">{article.emoji}</span>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm sm:text-base font-bold font-[Outfit] text-foreground group-hover:text-primary transition-colors leading-tight">
+                  <h3 className="text-sm sm:text-base font-bold font-[Sora] text-foreground group-hover:text-primary transition-colors leading-tight">
                     {article.title}
                   </h3>
                   <div className="flex items-center gap-3 mt-1.5 text-[10px] sm:text-xs text-muted-foreground/60">
@@ -78,10 +78,10 @@ export default function Blog() {
 
               <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed flex-1">{article.excerpt}</p>
 
-              <div className="flex items-center justify-between mt-4 pt-3 border-t border-border/30">
+              <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/10">
                 <div className="flex flex-wrap gap-1">
                   {article.tags.map((tag) => (
-                    <span key={tag} className="px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px] font-medium rounded-md bg-primary/8 text-primary/80 border border-primary/10">
+                    <span key={tag} className="px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px] font-medium rounded-md bg-gradient-to-r from-primary/20 to-accent/20 text-primary border border-white/10">
                       {tag}
                     </span>
                   ))}
@@ -96,7 +96,7 @@ export default function Blog() {
 
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-8">
           <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border border-border hover:border-primary/40 text-muted-foreground hover:text-foreground transition-all">
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium border border-white/15 bg-white/5 hover:border-primary/40 text-muted-foreground hover:text-foreground transition-all">
             <FiBookOpen size={16} /> View All Articles
           </motion.button>
         </motion.div>

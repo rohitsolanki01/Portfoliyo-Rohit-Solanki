@@ -31,13 +31,13 @@ export default function Journey() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
           <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/60">Journey</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Outfit] mt-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Sora] mt-2">
             Learning <span className="gradient-text">Path</span>
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground mt-3 max-w-lg">My growth as a developer — from first lines of code to full-stack applications.</p>
         </motion.div>
-<div className="relative mt-10 sm:mt-14">
-<div className="absolute left-5 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary/30 via-primary/15 to-transparent" />
+        <div className="relative mt-10 sm:mt-14">
+          <div className="absolute left-5 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary/45 via-accent/35 to-transparent" />
 
           <div className="space-y-6 sm:space-y-10">
             {milestones.map((m, i) => (
@@ -49,19 +49,19 @@ export default function Journey() {
                 transition={{ delay: i * 0.15 }}
                 className="relative flex gap-4 sm:gap-6 pl-14 sm:pl-16"
               >
-<motion.div
+                <motion.div
                   whileHover={{ scale: 1.15 }}
-                  className="absolute left-0 flex w-10 h-10 sm:w-12 sm:h-12 rounded-xl items-center justify-center border border-border/50 bg-card shadow-md"
+                  className="absolute left-0 flex w-10 h-10 sm:w-12 sm:h-12 rounded-xl items-center justify-center border border-white/15 bg-card/65 backdrop-blur-md shadow-md"
                   style={{ boxShadow: `0 0 20px ${m.color}15` }}
                 >
                   <m.icon size={18} style={{ color: m.color }} />
                 </motion.div>
-<div className="flex-1 rounded-xl border border-border/50 bg-card/30 p-4 sm:p-5 hover:border-primary/20 transition-colors group">
+                <div className="flex-1 rounded-2xl border border-white/10 bg-card/45 backdrop-blur-xl p-4 sm:p-5 hover:border-primary/35 transition-colors group">
                   <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
-                    <span className="text-[10px] sm:text-xs font-mono font-semibold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md border border-border/50 text-muted-foreground" style={{ color: m.color, borderColor: `${m.color}30` }}>
+                    <span className="text-[10px] sm:text-xs font-mono font-semibold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md border border-white/15 text-muted-foreground" style={{ color: m.color, borderColor: `${m.color}40` }}>
                       {m.year}
                     </span>
-                    <h3 className="text-base sm:text-lg font-bold font-[Outfit] text-foreground">{m.title}</h3>
+                    <h3 className="text-base sm:text-lg font-bold font-[Sora] text-foreground">{m.title}</h3>
                   </div>
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
                 </div>

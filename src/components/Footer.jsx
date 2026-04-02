@@ -11,7 +11,7 @@ export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <footer className="border-t border-border/30">
+    <footer className="border-t border-white/10 bg-background/40 backdrop-blur-xl">
       <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground/60 flex items-center gap-1">
@@ -19,12 +19,12 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-3">
             {socials.map((s) => (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground/40 hover:text-primary transition-colors" aria-label={s.label}>
+              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg border border-white/10 bg-white/5 text-muted-foreground/70 hover:text-primary transition-colors" aria-label={s.label}>
                 <s.icon size={15} />
               </a>
             ))}
-            <div className="w-px h-4 bg-border/30 mx-1" />
-            <motion.button whileHover={{ y: -2 }} onClick={scrollToTop} className="text-muted-foreground/40 hover:text-primary transition-colors" aria-label="Back to top">
+            <div className="w-px h-4 bg-white/15 mx-1" />
+            <motion.button whileHover={{ y: -2 }} onClick={scrollToTop} className="p-2 rounded-lg border border-white/10 bg-white/5 text-muted-foreground/70 hover:text-primary transition-colors" aria-label="Back to top">
               <FiArrowUp size={15} />
             </motion.button>
           </div>

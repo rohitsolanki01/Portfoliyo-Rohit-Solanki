@@ -13,13 +13,13 @@ export default function About() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
           <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/60">About</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Outfit] mt-2 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Sora] mt-2 leading-tight">
             Get to know <span className="gradient-text">me</span>
           </h2>
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-16 mt-8 sm:mt-12">
-<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} className="lg:col-span-3 space-y-4 sm:space-y-5">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} className="lg:col-span-3 space-y-4 sm:space-y-5 rounded-3xl border border-white/10 bg-card/35 backdrop-blur-xl p-5 sm:p-7">
             <p className="text-base sm:text-lg text-foreground leading-relaxed">
               I&apos;m <strong className="gradient-text">Rohit Solanki</strong>, a passionate Full Stack Web Developer specializing in the <strong>MERN stack</strong>. I build fast, scalable, and beautiful web applications.
             </p>
@@ -29,18 +29,18 @@ export default function About() {
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
               I&apos;m also experienced in <strong className="text-foreground">JavaScript</strong> and <strong className="text-foreground">Data Structures & Algorithms</strong>, keeping my problem-solving skills sharp. My goal is to become a top-tier full-stack developer and contribute to impactful products.
             </p>
-<div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4">
+            <div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4">
               {highlights.map((item, i) => (
                 <motion.div key={item.label} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 + i * 0.1 }}
-                  className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border border-border/50 bg-card/50 text-xs sm:text-sm text-muted-foreground hover:border-primary/30 hover:text-foreground transition-all">
+                  className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl border border-white/10 bg-white/5 text-xs sm:text-sm text-muted-foreground hover:border-primary/35 hover:text-foreground hover:bg-white/10 transition-all">
                   <item.icon size={14} className="text-primary shrink-0" />
                   {item.label}
                 </motion.div>
               ))}
             </div>
           </motion.div>
-<motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="lg:col-span-2">
-            <div className="rounded-2xl border border-border/50 bg-card/50 p-5 sm:p-6 space-y-3 sm:space-y-4">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="lg:col-span-2">
+            <div className="rounded-3xl border border-white/10 bg-card/45 backdrop-blur-xl p-5 sm:p-6 space-y-3 sm:space-y-4 shadow-[0_14px_40px_-25px_rgba(0,0,0,0.7)]">
               <h3 className="text-sm font-semibold tracking-widest uppercase text-muted-foreground/60">Quick Info</h3>
               <div className="space-y-2 sm:space-y-3">
                 {[
@@ -51,7 +51,7 @@ export default function About() {
                   ['Location', 'India 🇮🇳'],
                   ['Focus', 'Web Applications & APIs'],
                 ].map(([key, val]) => (
-                  <div key={key} className="flex justify-between items-start gap-3 sm:gap-4 py-1.5 sm:py-2 border-b border-border/30 last:border-0">
+                  <div key={key} className="flex justify-between items-start gap-3 sm:gap-4 py-1.5 sm:py-2 border-b border-white/10 last:border-0">
                     <span className="text-xs sm:text-sm text-muted-foreground shrink-0">{key}</span>
                     <span className="text-xs sm:text-sm text-foreground text-right font-medium">{val}</span>
                   </div>
