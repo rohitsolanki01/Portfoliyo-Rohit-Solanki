@@ -1,82 +1,16 @@
 import { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { SiFigma, SiGithub, SiNetlify, SiVercel } from 'react-icons/si';
 import Logo from './components/Logo';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
-import Journey from './components/Journey';
-import Certifications from './components/Certifications';
-import Testimonials from './components/Testimonials';
 import GitHub from './components/GitHub';
+import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-
-function IntroScreen({ onComplete }) {
-  useEffect(() => {
-    const t = setTimeout(onComplete, 3200);
-    return () => clearTimeout(t);
-  }, [onComplete]);
-
-  return (
-    <motion.div exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.6 }}
-      className="fixed inset-0 z-[100] bg-background flex items-center justify-center overflow-hidden">
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 rounded-full bg-primary/30"
-          initial={{ opacity: 0, x: 0, y: 0 }}
-          animate={{
-            opacity: [0, 0.6, 0],
-            x: [0, (i % 2 === 0 ? 1 : -1) * (60 + i * 30)],
-            y: [0, -(80 + i * 20)],
-          }}
-          transition={{ delay: 1 + i * 0.2, duration: 2, ease: 'easeOut' }}
-          style={{ left: `${40 + i * 4}%`, top: '55%' }}
-        />
-      ))}
-
-      <div className="text-center relative">
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.15, scale: 1 }}
-          transition={{ delay: 0.3, duration: 1.5 }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-60 h-60 rounded-full"
-          style={{ background: 'radial-gradient(circle, oklch(0.73 0.15 215 / 0.55), transparent 65%)' }}
-        />
-        <motion.div initial={{ opacity: 0, scale: 0.5, rotateY: -30 }} animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-          transition={{ duration: 0.7, type: 'spring', stiffness: 180 }}
-          className="mx-auto mb-6 relative">
-          <Logo size={80} animated />
-        </motion.div>
-        <div className="flex justify-center gap-[2px] mb-1">
-          {'Rohit Solanki'.split('').map((char, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.6 + i * 0.04, duration: 0.3 }}
-              className="text-xl font-bold font-[Sora] tracking-tight text-foreground"
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </motion.span>
-          ))}
-        </div>
-
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2 }}
-          className="text-[11px] tracking-[3px] uppercase text-muted-foreground/60 font-medium">Full Stack Developer</motion.p>
-        <motion.div className="mt-6 w-52 h-[2px] bg-border/30 rounded-full mx-auto overflow-hidden"
-          initial={{ opacity: 0, scaleX: 0.5 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ delay: 2.0 }}>
-          <motion.div className="h-full rounded-full"
-            style={{ background: 'linear-gradient(90deg, oklch(0.73 0.15 215), oklch(0.78 0.13 160), oklch(0.73 0.15 215))' }}
-            initial={{ width: '0%' }} animate={{ width: '100%' }}
-            transition={{ delay: 2.2, duration: 1, ease: [0.65, 0, 0.35, 1] }} />
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-}
 
 function ScrollProgress() {
   const [p, setP] = useState(0);
@@ -88,32 +22,126 @@ function ScrollProgress() {
   return <div className="fixed top-0 left-0 right-0 z-[60] h-[2px]"><div className="h-full bg-gradient-to-r from-primary via-accent to-primary transition-all duration-100" style={{ width: `${p}%` }} /></div>;
 }
 
+function SectionDivider() {
+  return (
+    <div className="section-divider-wrap" aria-hidden="true">
+      <div className="section-divider" />
+    </div>
+  );
+}
+
+function EntryCinematic({ onDone }) {
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const t = setTimeout(onDone, prefersReducedMotion ? 900 : 2400);
+    return () => clearTimeout(t);
+  }, [onDone, prefersReducedMotion]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.98 }}
+      transition={{ duration: prefersReducedMotion ? 0.25 : 0.65 }}
+      className="fixed inset-0 z-[140] bg-[radial-gradient(circle_at_50%_8%,rgba(43,206,164,0.24),transparent_40%),linear-gradient(180deg,rgba(7,10,17,1),rgba(4,7,13,1))] flex items-center justify-center"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55 }}
+        className="text-center"
+      >
+        <Logo size={92} animated />
+        <p className="mt-5 text-xl sm:text-2xl font-[Sora] font-semibold tracking-tight">Rohit Solanki</p>
+        <p className="mt-1 text-[11px] tracking-[0.3em] uppercase text-muted-foreground">Full Stack Developer</p>
+        <div className="mt-5 mx-auto w-44 h-[2px] rounded-full bg-white/10 overflow-hidden">
+          <motion.div
+            className="h-full bg-gradient-to-r from-primary via-accent to-primary"
+            initial={{ x: '-100%' }}
+            animate={{ x: '100%' }}
+            transition={{ duration: 1.2, ease: 'easeInOut', repeat: prefersReducedMotion ? 0 : Infinity }}
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function BrandRibbon() {
+  const prefersReducedMotion = useReducedMotion();
+  const brands = [
+    { name: 'Figma', Icon: SiFigma, featured: true },
+    { name: 'Vercel', Icon: SiVercel },
+    { name: 'GitHub', Icon: SiGithub },
+    { name: 'Netlify', Icon: SiNetlify, featured: true },
+    { name: 'Figma', Icon: SiFigma, featured: true },
+    { name: 'Vercel', Icon: SiVercel },
+    { name: 'GitHub', Icon: SiGithub },
+    { name: 'Netlify', Icon: SiNetlify, featured: true },
+  ];
+  const loopedBrands = [...brands, ...brands];
+
+  return (
+    <div className="brand-ribbon relative overflow-hidden">
+      <div className="brand-ribbon-label">Design + Deploy Stack</div>
+      <motion.div
+        className="brand-track text-sm w-max"
+        animate={prefersReducedMotion ? undefined : { x: ['0%', '-50%'] }}
+        transition={prefersReducedMotion ? undefined : { duration: 24, repeat: Infinity, ease: 'linear' }}
+      >
+        {loopedBrands.map((brand, index) => (
+          <span key={`${brand.name}-${index}`} className={`brand-chip ${brand.featured ? 'brand-chip-featured' : ''}`}>
+            <brand.Icon size={15} />
+            <span>{brand.name}</span>
+          </span>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
 export default function App() {
-  const [dark, setDark] = useState(true);
-  const [intro, setIntro] = useState(true);
+  const [dark] = useState(true);
+  const [showEntry, setShowEntry] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark);
   }, [dark]);
 
+  useEffect(() => {
+    const seen = sessionStorage.getItem('portfolio-entry-seen');
+    if (!seen) {
+      setShowEntry(true);
+      sessionStorage.setItem('portfolio-entry-seen', '1');
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300 relative">
       <div className="grid-bg" />
 
-      <AnimatePresence>{intro && <IntroScreen onComplete={() => setIntro(false)} />}</AnimatePresence>
+      <AnimatePresence>
+        {showEntry && <EntryCinematic onDone={() => setShowEntry(false)} />}
+      </AnimatePresence>
 
       <ScrollProgress />
-      <Navbar darkMode={dark} setDarkMode={setDark} />
+      <Navbar />
 
       <main className="relative z-10">
         <Hero />
+        <SectionDivider />
         <About />
+        <SectionDivider />
         <Skills />
+        <SectionDivider />
+        <BrandRibbon />
+        <SectionDivider />
         <Projects />
-        <Journey />
-        <Certifications />
-        <Testimonials />
+        <SectionDivider />
         <GitHub />
+        <SectionDivider />
+        <Testimonials />
+        <SectionDivider />
         <Contact />
       </main>
 

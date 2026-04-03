@@ -3,98 +3,72 @@ import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt, FaGithub, FaData
 import { SiTailwindcss, SiExpress, SiMongodb, SiPostman } from 'react-icons/si';
 import { TbBinaryTree } from 'react-icons/tb';
 
-const categories = [
+const stacks = [
   {
     title: 'Frontend',
-    skills: [
-      { name: 'HTML5', icon: FaHtml5, color: '#E34F26', level: 95 },
-      { name: 'CSS3', icon: FaCss3Alt, color: '#1572B6', level: 90 },
-      { name: 'JavaScript', icon: FaJs, color: '#F7DF1E', level: 85 },
-      { name: 'React', icon: FaReact, color: '#61DAFB', level: 85 },
-      { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4', level: 88 },
-    ],
+    description: 'JavaScript, TypeScript, React, Next.js, HTML, CSS, Tailwind for responsive user interfaces.',
+    className: 'md:col-span-3',
+    items: [FaReact, SiTailwindcss, FaJs, FaHtml5, FaCss3Alt],
+  },
+  {
+    title: 'Databases',
+    description: 'MongoDB and document modeling with performant read/write flow for full stack products.',
+    className: 'md:col-span-2',
+    items: [SiMongodb, FaDatabase],
   },
   {
     title: 'Backend',
-    skills: [
-      { name: 'Node.js', icon: FaNodeJs, color: '#339933', level: 82 },
-      { name: 'Express.js', icon: SiExpress, color: '#888', level: 80 },
-      { name: 'MongoDB', icon: SiMongodb, color: '#47A248', level: 78 },
-      { name: 'REST APIs', icon: FaDatabase, color: '#FF6B35', level: 85 },
-    ],
+    description: 'Node.js and Express APIs with auth, middleware, and clean service architecture.',
+    className: 'md:col-span-2',
+    items: [FaNodeJs, SiExpress, TbBinaryTree],
   },
   {
-    title: 'Tools & Others',
-    skills: [
-      { name: 'Postman', icon: SiPostman, color: '#FF6C37', level: 80 },
-      { name: 'Problem Solving', icon: TbBinaryTree, color: '#FF4081', level: 75 },
-      { name: 'Git', icon: FaGitAlt, color: '#F05032', level: 82 },
-      { name: 'GitHub', icon: FaGithub, color: '#888', level: 85 },
-    ],
+    title: 'Authentication',
+    description: 'Sessions, JWT, role-based access, secure validations, and route protection.',
+    className: 'md:col-span-1',
+    items: [FaGitAlt, FaGithub],
+  },
+  {
+    title: 'Tools',
+    description: 'Postman, Git, GitHub workflows for collaboration, testing, and reliable deployment.',
+    className: 'md:col-span-2',
+    items: [SiPostman, FaGithub, FaGitAlt],
   },
 ];
 
-function SkillBar({ skill, delay }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -15 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay }}
-      className="group"
-    >
-      <div className="flex items-center justify-between mb-1.5">
-        <div className="flex items-center gap-2.5">
-          <skill.icon size={16} style={{ color: skill.color }} className="shrink-0" />
-          <span className="text-xs sm:text-sm font-medium text-foreground">{skill.name}</span>
-        </div>
-        <motion.span
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: delay + 0.5 }}
-          className="text-[10px] sm:text-xs font-mono text-muted-foreground/60"
-        >
-          {skill.level}%
-        </motion.span>
-      </div>
-      <div className="h-1.5 sm:h-2 rounded-full bg-white/10 overflow-hidden">
-        <motion.div
-          className="h-full rounded-full"
-          style={{ background: `linear-gradient(90deg, ${skill.color}CC, ${skill.color})` }}
-          initial={{ width: 0 }}
-          whileInView={{ width: `${skill.level}%` }}
-          viewport={{ once: true }}
-          transition={{ delay: delay + 0.2, duration: 0.8, ease: [0.65, 0, 0.35, 1] }}
-        />
-      </div>
-    </motion.div>
-  );
-}
-
 export default function Skills() {
   return (
-    <section id="skills" className="py-16 sm:py-20 lg:py-28 relative">
+    <section id="skills" className="py-14 sm:py-18 lg:py-20 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
-          <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/60">Skills</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Sora] mt-2">
-            Tech Stack & <span className="gradient-text">Tools</span>
+          <span className="section-badge">Skills and Tech Stack</span>
+          <h2 className="section-title">
+            My <span className="gradient-text">Tech Toolbox</span>
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground mt-3 max-w-lg">Technologies I use to build modern web applications.</p>
+          <p className="section-copy text-sm sm:text-base">A compact ecosystem of technologies I use to build complete production-ready web products.</p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
-          {categories.map((cat, ci) => (
-            <motion.div key={cat.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: ci * 0.1 }}
-              className="rounded-3xl border border-white/10 bg-card/45 backdrop-blur-xl p-4 sm:p-6 hover:border-primary/35 transition-colors shadow-[0_14px_40px_-25px_rgba(0,0,0,0.7)]">
-              <h3 className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-muted-foreground/60 mb-5 sm:mb-6">{cat.title}</h3>
-              <div className="space-y-4 sm:space-y-5">
-                {cat.skills.map((skill, si) => (
-                  <SkillBar key={skill.name} skill={skill} delay={ci * 0.05 + si * 0.08} />
+        <div className="grid md:grid-cols-5 gap-4 sm:gap-5 mt-8 sm:mt-10">
+          {stacks.map((stack, index) => (
+            <motion.article
+              key={stack.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.06 }}
+              className={`reference-panel rounded-2xl p-4 sm:p-5 ${stack.className}`}
+            >
+              <div className="flex flex-wrap gap-2 mb-4">
+                {stack.items.map((Icon, i) => (
+                  <div key={i} className="w-10 h-10 rounded-lg border border-white/12 bg-black/30 flex items-center justify-center text-primary">
+                    <Icon size={16} />
+                  </div>
                 ))}
               </div>
-            </motion.div>
+
+              <h3 className="text-xl font-serif italic text-primary">{stack.title}</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-2 leading-relaxed">{stack.description}</p>
+            </motion.article>
           ))}
         </div>
       </div>

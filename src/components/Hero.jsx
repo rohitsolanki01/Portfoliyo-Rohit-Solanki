@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 import { HiDownload } from 'react-icons/hi';
@@ -16,118 +16,169 @@ const techIcons = [
 ];
 
 export default function Hero() {
+  const prefersReducedMotion = useReducedMotion();
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const sx = useSpring(px, { stiffness: 120, damping: 18, mass: 0.35 });
+  const sy = useSpring(py, { stiffness: 120, damping: 18, mass: 0.35 });
+
+  const bgX = useTransform(sx, [-1, 1], [-26, 26]);
+  const bgY = useTransform(sy, [-1, 1], [-20, 20]);
+  const bgXAlt = useTransform(bgX, (v) => v * -0.75);
+  const bgYAlt = useTransform(bgY, (v) => v * -0.75);
+  const bgXThird = useTransform(bgX, (v) => v * 0.6);
+  const bgYThird = useTransform(bgY, (v) => v * 0.6);
+  const cardX = useTransform(sx, [-1, 1], [-12, 12]);
+  const cardY = useTransform(sy, [-1, 1], [-10, 10]);
+
+  const handlePointerMove = (e) => {
+    if (prefersReducedMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+    px.set(nx);
+    py.set(ny);
+  };
+
+  const handlePointerLeave = () => {
+    px.set(0);
+    py.set(0);
+  };
+
+  const staggerParent = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: prefersReducedMotion
+        ? { duration: 0.2 }
+        : { staggerChildren: 0.11, delayChildren: 0.1 },
+    },
+  };
+
+  const revealUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 18 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: prefersReducedMotion
+        ? { duration: 0.2 }
+        : { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center">
+    <section id="home" className="relative min-h-screen flex items-center pt-10" onMouseMove={handlePointerMove} onMouseLeave={handlePointerLeave}>
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-[14%] left-[8%] w-[320px] sm:w-[560px] h-[320px] sm:h-[560px] bg-primary/12 rounded-full blur-[145px] animate-pulse-soft" />
-        <div className="absolute bottom-[12%] right-[10%] w-[260px] sm:w-[460px] h-[260px] sm:h-[460px] bg-accent/10 rounded-full blur-[130px] animate-pulse-soft" style={{ animationDelay: '2s' }} />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(255,255,255,0.08),transparent_45%)]" />
+        <motion.div style={prefersReducedMotion ? undefined : { x: bgX, y: bgY }} className="absolute top-[-16%] left-[6%] w-[520px] h-[420px] bg-primary/20 rounded-full blur-[140px]" />
+        <motion.div style={prefersReducedMotion ? undefined : { x: bgXAlt, y: bgYAlt }} className="absolute top-[18%] right-[10%] w-[420px] h-[360px] bg-accent/18 rounded-full blur-[120px]" />
+        <motion.div style={prefersReducedMotion ? undefined : { x: bgXThird, y: bgYThird }} className="absolute bottom-[-20%] left-[20%] w-[540px] h-[420px] bg-primary/10 rounded-full blur-[150px]" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full py-16 sm:py-20 pt-24 sm:pt-32">
-        <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 items-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="lg:col-span-3 space-y-5 sm:space-y-6 text-center lg:text-left">
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs sm:text-sm font-medium text-muted-foreground">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Available for Full Stack Roles
-            </motion.p>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full py-14 sm:py-16">
+        <div className="reference-panel relative overflow-hidden p-6 sm:p-8 lg:p-10">
+          <div className="spotlight-beam" />
+          <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-center relative z-10">
+            <motion.div
+              variants={staggerParent}
+              initial="hidden"
+              animate="visible"
+              className="lg:col-span-3 text-center lg:text-left"
+            >
+              <motion.h1 variants={revealUp} className="mt-4 text-[2.25rem] sm:text-[3.15rem] lg:text-[4rem] font-[Sora] font-semibold tracking-tight leading-[1.03]">
+                From <em className="font-serif font-medium italic text-primary not-italic sm:italic">Sketch</em> to Scale
+                <br /> I Build the Web You
+                <span className="gradient-text"> Imagine</span>
+              </motion.h1>
 
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold font-[Sora] tracking-tight leading-[1.05]">
-              Building sleek digital
-              <br className="hidden sm:block" /> experiences as
-              <br className="hidden sm:block" /> <span className="gradient-text">Rohit Solanki</span>
-            </motion.h1>
+              <motion.p variants={revealUp} className="mt-4 text-sm sm:text-[0.96rem] text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                Full Stack Developer and{' '}
+                <TypeAnimation
+                  sequence={['MERN Specialist', 1800, 'React Engineer', 1800, 'Backend Builder', 1800]}
+                  wrapper="strong"
+                  speed={50}
+                  repeat={Infinity}
+                  className="text-foreground"
+                />{' '}
+                shipping polished interfaces and stable APIs with measurable business impact.
+              </motion.p>
 
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}
-              className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed mx-auto lg:mx-0">
-              A <strong className="text-foreground">Full Stack Developer</strong> and{' '}
-              <TypeAnimation
-                sequence={['MERN Stack Developer', 2000, 'React Developer', 2000, 'Backend Engineer', 2000, 'Problem Solver', 2000]}
-                wrapper="strong" speed={50} repeat={Infinity} className="text-foreground"
-              />{' '}
-              focused on performant interfaces, scalable APIs, and product-first execution.
-            </motion.p>
+              <motion.div variants={revealUp} className="mt-5 grid grid-cols-2 sm:flex gap-3 justify-center lg:justify-start">
+                <div className="hero-stat"><strong>5+</strong><span>Projects Completed</span></div>
+                <div className="hero-stat col-span-2 sm:col-span-1"><strong>100%</strong><span>Delivery Focus</span></div>
+              </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-3 pt-2">
-              <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                onClick={() => scrollTo('contact')}
-                className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-[0_12px_45px_-16px_rgba(80,190,255,0.8)] hover:shadow-[0_12px_55px_-12px_rgba(117,255,197,0.75)] transition-all text-sm">
-                Let&apos;s Work Together
-              </motion.button>
-              <motion.a whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} href="https://d8it4huxumps7.cloudfront.net/uploads/attachements/user-resumes/6996b7df96be1_Rohit_Solanki_Full_Stack_Developer.pdf" target="_blank" rel="noopener noreferrer"
-                className="group px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold border border-white/15 bg-white/5 hover:border-primary/40 hover:bg-white/8 text-muted-foreground hover:text-foreground transition-all flex items-center gap-2 text-sm">
-                <HiDownload size={16} /> Resume
-              </motion.a>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }}
-              className="flex justify-center lg:justify-start gap-3 pt-3">
-              {[
-                { icon: FiGithub, href: 'https://github.com/rohitsolanki01', label: 'GitHub' },
-                { icon: FiLinkedin, href: 'https://www.linkedin.com/in/rohit--solanki/', label: 'LinkedIn' },
-                { icon: FiMail, href: 'mailto:rohitsolanki0473@gmail.com', label: 'Email' },
-              ].map((s) => (
-                <motion.a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.9 }}
-                  className="p-2.5 rounded-xl border border-white/10 bg-white/5 text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-white/10 transition-all"
-                  aria-label={s.label}>
-                  <s.icon size={18} />
+              <motion.div variants={revealUp} className="mt-6 flex flex-wrap gap-3 justify-center lg:justify-start items-center">
+                <motion.button
+                  onClick={() => scrollTo('projects')}
+                  whileHover={prefersReducedMotion ? undefined : { y: -2, scale: 1.02 }}
+                  whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
+                  className="px-6 py-2.5 rounded-lg text-sm font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-[0_16px_40px_-20px_rgba(37,187,149,0.8)]"
+                >
+                  View Projects
+                </motion.button>
+                <motion.a
+                  whileHover={prefersReducedMotion ? undefined : { y: -2, scale: 1.02 }}
+                  whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
+                  href="https://d8it4huxumps7.cloudfront.net/uploads/attachements/user-resumes/6996b7df96be1_Rohit_Solanki_Full_Stack_Developer.pdf" target="_blank" rel="noopener noreferrer"
+                  className="px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/15 bg-white/5 text-foreground hover:border-primary/40 transition-colors flex items-center gap-2">
+                  <HiDownload size={15} /> Resume
                 </motion.a>
-              ))}
+              </motion.div>
+
+              <motion.div variants={revealUp} className="mt-4 flex gap-2.5 justify-center lg:justify-start">
+                {[
+                  { icon: FiGithub, href: 'https://github.com/rohitsolanki01', label: 'GitHub' },
+                  { icon: FiLinkedin, href: 'https://www.linkedin.com/in/rohit--solanki/', label: 'LinkedIn' },
+                  { icon: FiMail, href: 'mailto:rohitsolanki0473@gmail.com', label: 'Email' },
+                ].map((s) => (
+                  <motion.a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                    whileHover={prefersReducedMotion ? undefined : { y: -2, scale: 1.05 }}
+                    whileTap={prefersReducedMotion ? undefined : { scale: 0.95 }}
+                    className="p-2.5 rounded-lg border border-white/12 bg-white/5 text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors"
+                    aria-label={s.label}>
+                    <s.icon size={16} />
+                  </motion.a>
+                ))}
+              </motion.div>
             </motion.div>
-          </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4, duration: 0.7 }}
-            className="lg:col-span-2 flex justify-center items-center relative order-first lg:order-last">
-            <div className="absolute w-48 sm:w-64 lg:w-80 h-48 sm:h-64 lg:h-80 bg-primary/16 rounded-full blur-[100px] animate-pulse-soft" />
-
-            <div className="relative">
-              <div className="absolute inset-[-20px] sm:inset-[-30px] rounded-full border border-white/15" />
-              <div className="absolute inset-[-40px] sm:inset-[-60px] rounded-full border border-white/10 hidden sm:block" />
-
-              <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="absolute inset-[-20px] sm:inset-[-30px] rounded-full">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-accent shadow-lg shadow-accent/40" />
+            <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.7 }} className="lg:col-span-2">
+              <motion.div
+                className="relative max-w-sm mx-auto"
+                style={prefersReducedMotion ? undefined : { x: cardX, y: cardY }}
+                animate={prefersReducedMotion ? undefined : { y: [0, -6, 0] }}
+                transition={prefersReducedMotion ? undefined : { duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <div className="absolute -inset-4 rounded-[1.7rem] border border-white/10 bg-gradient-to-br from-primary/14 to-accent/10 blur-sm" />
+                <div className="relative rounded-[1.6rem] overflow-hidden border border-white/16 bg-card/65 backdrop-blur-xl">
+                  <img src="/images/avatar.png" alt="Rohit Solanki" className="w-full h-[390px] sm:h-[450px] object-cover object-top" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+                </div>
+                <div className="absolute -bottom-3 left-4 right-4 rounded-xl glass-panel px-4 py-3 text-xs">
+                  <p className="text-muted-foreground">Focused on product quality, performance, and developer experience.</p>
+                  <motion.button
+                    onClick={() => scrollTo('contact')}
+                    whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
+                    whileTap={prefersReducedMotion ? undefined : { scale: 0.97 }}
+                    className="mt-2 px-3 py-1.5 rounded-md text-[11px] font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground"
+                  >
+                    Hire Me
+                  </motion.button>
+                </div>
               </motion.div>
-
-              <div className="relative w-44 h-44 sm:w-56 sm:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-white/20 shadow-[0_22px_65px_-20px_rgba(39,181,255,0.8)]">
-                <img src="/images/avatar.png" alt="Rohit Solanki" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent" />
-              </div>
-
-              <motion.div animate={{ y: [-4, 4, -4] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -bottom-2 -right-2 sm:-right-4 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-card/85 border border-white/20 shadow-lg text-[10px] sm:text-xs font-medium text-foreground flex items-center gap-1.5 backdrop-blur-md">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="hidden xs:inline">Available for work</span>
-                <span className="xs:hidden">Open to work</span>
-              </motion.div>
-
-              <motion.div animate={{ y: [3, -5, 3] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-3 sm:-top-4 -left-3 sm:-left-6 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-card/85 border border-white/20 shadow-lg text-[10px] sm:text-xs font-mono text-muted-foreground backdrop-blur-md">
-                &lt;Developer /&gt;
-              </motion.div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}
-          className="mt-12 sm:mt-16 lg:mt-20 pt-6 sm:pt-8 border-t border-white/10">
-          <p className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-muted-foreground/60 mb-3 sm:mb-4 text-center lg:text-left">Tech Stack & Tools</p>
-          <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6">
-            {techIcons.map((t) => (
-              <motion.div key={t.label} whileHover={{ y: -3, scale: 1.1 }}
-                className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground hover:text-foreground transition-colors cursor-default group"
-                title={t.label}>
-                <t.icon size={18} style={{ color: t.color }} className="opacity-70 group-hover:opacity-100 transition-opacity sm:text-[22px]" />
-                <span className="text-[10px] sm:text-xs font-medium">{t.label}</span>
-              </motion.div>
-            ))}
-          </div>
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="mt-7 flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6">
+          {techIcons.map((t) => (
+            <div key={t.label} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors" title={t.label}>
+              <t.icon size={18} style={{ color: t.color }} className="opacity-80" />
+              <span className="text-xs font-medium">{t.label}</span>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

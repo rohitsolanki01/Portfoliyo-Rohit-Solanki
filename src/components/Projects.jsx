@@ -1,7 +1,22 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { FiGithub, FiExternalLink, FiArrowRight } from 'react-icons/fi';
 
 const projects = [
+  {
+    title: 'StackMeet',
+    emoji: '🤝',
+    color: '#22d3ee',
+    description: 'A developer networking platform where engineers showcase their stack, discover collaborators, connect, and chat in real time.',
+    highlights: [
+      'JWT cookie auth, protected/public routing, and secure password reset flow',
+      'Explore feed with filters, connection requests/reviews, and accepted-connections graph',
+      '1:1 realtime chat + notifications using Socket.IO with HTTP fallback support',
+    ],
+    tech: ['React 19', 'Vite', 'Redux Toolkit', 'Node.js', 'Express 5', 'MongoDB', 'Mongoose', 'Socket.IO', 'Cloudinary', 'JWT'],
+    github: 'https://github.com/rohitsolanki01',
+    live: 'https://www.stackmeet.tech/',
+    screenshot: '/images/projects/stackmeet.png',
+  },
   {
     title: 'Tranquvest',
     emoji: '💵',
@@ -45,29 +60,44 @@ const projects = [
 ];
 
 export default function Projects() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section id="projects" className="py-16 sm:py-20 lg:py-28 relative">
+    <section id="projects" className="py-14 sm:py-18 lg:py-20 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
-          <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/60">Projects</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Sora] mt-2">
-            Featured <span className="gradient-text">Work</span>
+          <span className="section-badge">Featured Projects</span>
+          <h2 className="section-title max-w-4xl">
+            Design Brands That <span className="gradient-text">Speak To Audiences</span>
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground mt-3 max-w-lg">Real-world applications I&apos;ve built and deployed.</p>
+          <p className="section-copy text-sm sm:text-base">Each product is crafted with strong visual direction and practical engineering behind the scenes.</p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 mt-8 sm:mt-12">
+        <motion.div
+          className="grid sm:grid-cols-2 gap-4 sm:gap-6 mt-8 sm:mt-10"
+          initial={prefersReducedMotion ? undefined : 'hidden'}
+          whileInView={prefersReducedMotion ? undefined : 'visible'}
+          viewport={{ once: true, margin: '-80px' }}
+          variants={
+            prefersReducedMotion
+              ? undefined
+              : {
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1, transition: { staggerChildren: 0.09 } },
+                }
+          }
+        >
           {projects.map((p, i) => (
-            <motion.div key={p.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="group rounded-3xl border border-white/10 bg-card/45 backdrop-blur-xl overflow-hidden hover:border-primary/35 hover:shadow-[0_20px_50px_-24px_rgba(76,191,255,0.5)] transition-all flex flex-col">
+            <motion.div key={p.title} initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={prefersReducedMotion ? undefined : { y: -8, scale: 1.01 }}
+              className="group reference-panel rounded-3xl overflow-hidden flex flex-col">
 
               {p.screenshot ? (
-                <div className="relative aspect-[16/9] overflow-hidden bg-secondary/20">
+                <div className="relative aspect-[16/9] overflow-hidden bg-secondary/20 border-b border-white/10">
                   <img
                     src={p.screenshot}
                     alt={`${p.title} preview`}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/75 via-transparent to-transparent" />
@@ -78,7 +108,7 @@ export default function Projects() {
                   </div>
                 </div>
               ) : (
-                <div className="px-4 sm:px-5 pt-3 sm:pt-4 pb-2.5 sm:pb-3 bg-background/45 border-b border-white/10">
+                <div className="px-4 sm:px-5 pt-3 sm:pt-4 pb-2.5 sm:pb-3 bg-black/25 border-b border-white/10">
                   <div className="flex items-center gap-1.5 mb-2">
                     <span className="w-2 h-2 rounded-full bg-red-400/70" />
                     <span className="w-2 h-2 rounded-full bg-amber-400/70" />
@@ -101,6 +131,17 @@ export default function Projects() {
 
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed flex-1">{p.description}</p>
 
+                {p.highlights && (
+                  <ul className="mt-3 space-y-1.5 text-[11px] sm:text-xs text-muted-foreground/90">
+                    {p.highlights.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary/80 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
                 <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-3 sm:mt-4">
                   {p.tech.map((t) => (
                     <span key={t} className="px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px] font-medium rounded-md bg-gradient-to-r from-primary/20 to-accent/20 text-primary border border-white/10">{t}</span>
@@ -109,22 +150,30 @@ export default function Projects() {
 
                 <div className="flex items-center justify-between mt-3 sm:mt-4 pt-3 border-t border-white/10">
                   <div className="flex gap-3">
-                    <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="GitHub">
-                      <FiGithub size={14} />
-                    </a>
+                    {p.github && (
+                      <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="GitHub">
+                        <FiGithub size={14} />
+                      </a>
+                    )}
                     {p.live && (
                       <a href={p.live} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Live demo">
                         <FiExternalLink size={14} />
                       </a>
                     )}
                   </div>
-                  <a href={p.live || p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-[10px] sm:text-xs font-medium text-muted-foreground hover:text-primary group-hover:text-primary transition-colors">
-                    {p.live ? 'Live demo' : 'View code'} <FiArrowRight size={11} className="group-hover:translate-x-1 transition-transform" />
-                  </a>
+                  {(p.live || p.github) && (
+                    <a href={p.live || p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-[10px] sm:text-xs font-medium text-muted-foreground hover:text-primary group-hover:text-primary transition-colors uppercase tracking-[0.08em]">
+                      Explore <FiArrowRight size={11} className="group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        <div className="text-center mt-7">
+          <a href="#contact" className="accent-link">Load More</a>
         </div>
       </div>
     </section>

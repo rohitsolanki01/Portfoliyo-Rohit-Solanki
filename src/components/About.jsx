@@ -1,62 +1,67 @@
 import { motion } from 'framer-motion';
-import { FiCode, FiBookOpen, FiTarget } from 'react-icons/fi';
+import { FiCode, FiBox, FiLayers, FiTerminal } from 'react-icons/fi';
 
-const highlights = [
-  { icon: FiCode, label: 'MERN Stack Specialist' },
-  { icon: FiBookOpen, label: 'Always Learning' },
-  { icon: FiTarget, label: 'Full Stack Focus' },
-];
+const ringIcons = [FiCode, FiBox, FiLayers, FiTerminal];
 
 export default function About() {
   return (
-    <section id="about" className="py-16 sm:py-20 lg:py-28 relative">
+    <section id="about" className="py-14 sm:py-18 lg:py-20 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
-          <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground/60">About</span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-[Sora] mt-2 leading-tight">
-            Get to know <span className="gradient-text">me</span>
-          </h2>
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-8 items-center reference-panel p-6 sm:p-8">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <span className="section-badge">About Me</span>
+            <h2 className="section-title mt-3">Everything About <span className="font-serif italic normal-case">Rohit</span></h2>
+            <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
+              Hi, I&apos;m Rohit, a Full Stack Developer focused on building modern web apps from interface to backend. I love shipping fast, scalable products with clean architecture and sharp interaction details.
+            </p>
+            <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed">
+              My stack includes React, Tailwind CSS, Node.js, Express, and MongoDB. I combine engineering discipline with product thinking to deliver solutions ready for real users.
+            </p>
+            <a href="#projects" className="accent-link inline-flex mt-5">More About Me →</a>
+          </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-16 mt-8 sm:mt-12">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} className="lg:col-span-3 space-y-4 sm:space-y-5 rounded-3xl border border-white/10 bg-card/35 backdrop-blur-xl p-5 sm:p-7">
-            <p className="text-base sm:text-lg text-foreground leading-relaxed">
-              I&apos;m <strong className="gradient-text">Rohit Solanki</strong>, a passionate Full Stack Web Developer specializing in the <strong>MERN stack</strong>. I build fast, scalable, and beautiful web applications.
-            </p>
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-              Currently pursuing my education while building real-world projects. My journey spans from pixel-perfect frontends with React and Tailwind CSS to robust backend APIs with Node.js, Express, and MongoDB.
-            </p>
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-              I&apos;m also experienced in <strong className="text-foreground">JavaScript</strong> and <strong className="text-foreground">Data Structures & Algorithms</strong>, keeping my problem-solving skills sharp. My goal is to become a top-tier full-stack developer and contribute to impactful products.
-            </p>
-            <div className="flex flex-wrap gap-2 sm:gap-3 pt-3 sm:pt-4">
-              {highlights.map((item, i) => (
-                <motion.div key={item.label} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 + i * 0.1 }}
-                  className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl border border-white/10 bg-white/5 text-xs sm:text-sm text-muted-foreground hover:border-primary/35 hover:text-foreground hover:bg-white/10 transition-all">
-                  <item.icon size={14} className="text-primary shrink-0" />
-                  {item.label}
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="relative flex justify-center">
+            <div className="relative w-[290px] h-[290px] sm:w-[360px] sm:h-[360px] rounded-full border border-white/10 bg-black/30">
+              <motion.div
+                className="absolute inset-8 rounded-full border border-primary/25"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
+              />
+              <motion.div
+                className="absolute inset-16 rounded-full border border-accent/25"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+              />
+
+              <motion.div
+                className="absolute inset-[34%] rounded-2xl border border-white/15 bg-black/35 flex items-center justify-center text-primary"
+                animate={{ scale: [1, 1.06, 1], boxShadow: ['0 0 0px rgba(60, 220, 170, 0)', '0 0 28px rgba(60, 220, 170, 0.35)', '0 0 0px rgba(60, 220, 170, 0)'] }}
+                transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <FiCode size={34} />
+              </motion.div>
+
+              {ringIcons.map((Icon, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute inset-0"
+                  animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
+                  transition={{ duration: 16 + i * 3, repeat: Infinity, ease: 'linear' }}
+                >
+                  <motion.div
+                    className="absolute w-10 h-10 rounded-xl border border-white/15 bg-black/45 flex items-center justify-center text-muted-foreground"
+                    style={{
+                      left: `${50 + Math.cos((i / ringIcons.length) * Math.PI * 2) * 42}%`,
+                      top: `${50 + Math.sin((i / ringIcons.length) * Math.PI * 2) * 42}%`,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                    animate={{ y: [0, -4, 0], scale: [1, 1.08, 1] }}
+                    transition={{ duration: 2.4 + i * 0.2, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    <Icon size={16} />
+                  </motion.div>
                 </motion.div>
               ))}
-            </div>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="lg:col-span-2">
-            <div className="rounded-3xl border border-white/10 bg-card/45 backdrop-blur-xl p-5 sm:p-6 space-y-3 sm:space-y-4 shadow-[0_14px_40px_-25px_rgba(0,0,0,0.7)]">
-              <h3 className="text-sm font-semibold tracking-widest uppercase text-muted-foreground/60">Quick Info</h3>
-              <div className="space-y-2 sm:space-y-3">
-                {[
-                  ['Name', 'Rohit Solanki'],
-                  ['Role', 'Full Stack Developer'],
-                  ['Stack', 'MERN (MongoDB, Express, React, Node)'],
-                  ['Education', 'BCA (Pursuing)'],
-                  ['Location', 'India 🇮🇳'],
-                  ['Focus', 'Web Applications & APIs'],
-                ].map(([key, val]) => (
-                  <div key={key} className="flex justify-between items-start gap-3 sm:gap-4 py-1.5 sm:py-2 border-b border-white/10 last:border-0">
-                    <span className="text-xs sm:text-sm text-muted-foreground shrink-0">{key}</span>
-                    <span className="text-xs sm:text-sm text-foreground text-right font-medium">{val}</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </motion.div>
         </div>
