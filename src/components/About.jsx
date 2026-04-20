@@ -1,71 +1,68 @@
-import { motion } from 'framer-motion';
-import { FiCode, FiBox, FiLayers, FiTerminal } from 'react-icons/fi';
-
-const ringIcons = [FiCode, FiBox, FiLayers, FiTerminal];
+﻿import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 
 export default function About() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const y = useTransform(scrollYProgress, [0, 1], [36, -36])
+
   return (
-    <section id="about" className="py-14 sm:py-18 lg:py-20 relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-8 items-center reference-panel p-6 sm:p-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span className="section-badge">About Me</span>
-            <h2 className="section-title mt-3">Everything About <span className="font-serif italic normal-case">Rohit</span></h2>
-            <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
-              Hi, I&apos;m Rohit, a Full Stack Developer focused on building modern web apps from interface to backend. I love shipping fast, scalable products with clean architecture and sharp interaction details.
+    <section id="about" ref={ref} className="relative bg-white px-6 py-28 dark:bg-neutral-950">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.8 }}
+          className="grid items-start gap-10 md:grid-cols-12"
+        >
+          <div className="md:col-span-4 md:sticky md:top-28">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="font-mono text-xs text-violet-500">01</span>
+              <span className="h-px w-8 bg-violet-400/40" />
+              <span className="text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-white/45">About</span>
+            </div>
+            <h2 className="font-display text-4xl font-bold tracking-tight text-neutral-900 md:text-5xl dark:text-white">
+              Engineering at the intersection of{' '}
+              <span className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text italic text-transparent dark:from-violet-400 dark:to-cyan-300">
+                design
+              </span>{' '}
+              and{' '}
+              <span className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text italic text-transparent dark:from-violet-400 dark:to-cyan-300">
+                scale
+              </span>
+              .
+            </h2>
+          </div>
+
+          <div className="space-y-6 text-lg font-light leading-relaxed text-neutral-700 md:col-span-8 md:text-xl dark:text-white/70">
+            <p>
+              I am a full stack developer focused on building products that feel premium and perform like systems software.
+              My obsession is the same from design to deployment: clarity, speed, and durable architecture.
             </p>
-            <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed">
-              My stack includes React, Tailwind CSS, Node.js, Express, and MongoDB. I combine engineering discipline with product thinking to deliver solutions ready for real users.
+            <p>
+              I have shipped Web3 and SaaS products, led critical frontend workstreams, and built APIs that stay stable
+              under real user load.
             </p>
-            <a href="#projects" className="accent-link inline-flex mt-5">More About Me →</a>
-          </motion.div>
+            <p className="text-neutral-500 dark:text-white/55">
+              I care deeply about interaction quality, developer experience, and measurable business outcomes.
+            </p>
 
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="relative flex justify-center">
-            <div className="relative w-[290px] h-[290px] sm:w-[360px] sm:h-[360px] rounded-full border border-white/10 bg-black/30">
-              <motion.div
-                className="absolute inset-8 rounded-full border border-primary/25"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
-              />
-              <motion.div
-                className="absolute inset-16 rounded-full border border-accent/25"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
-              />
-
-              <motion.div
-                className="absolute inset-[34%] rounded-2xl border border-white/15 bg-black/35 flex items-center justify-center text-primary"
-                animate={{ scale: [1, 1.06, 1], boxShadow: ['0 0 0px rgba(60, 220, 170, 0)', '0 0 28px rgba(60, 220, 170, 0.35)', '0 0 0px rgba(60, 220, 170, 0)'] }}
-                transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <FiCode size={34} />
-              </motion.div>
-
-              {ringIcons.map((Icon, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute inset-0"
-                  animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
-                  transition={{ duration: 16 + i * 3, repeat: Infinity, ease: 'linear' }}
+            <div className="flex flex-wrap gap-2 pt-6">
+              {['React', 'Node.js', 'Web3', 'System Design', 'Performance', 'DX'].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-black/10 bg-white/70 px-3.5 py-1.5 text-xs text-neutral-700 backdrop-blur-sm dark:border-white/10 dark:bg-white/5 dark:text-white/75"
                 >
-                  <motion.div
-                    className="absolute w-10 h-10 rounded-xl border border-white/15 bg-black/45 flex items-center justify-center text-muted-foreground"
-                    style={{
-                      left: `${50 + Math.cos((i / ringIcons.length) * Math.PI * 2) * 42}%`,
-                      top: `${50 + Math.sin((i / ringIcons.length) * Math.PI * 2) * 42}%`,
-                      transform: 'translate(-50%, -50%)',
-                    }}
-                    animate={{ y: [0, -4, 0], scale: [1, 1.08, 1] }}
-                    transition={{ duration: 2.4 + i * 0.2, repeat: Infinity, ease: 'easeInOut' }}
-                  >
-                    <Icon size={16} />
-                  </motion.div>
-                </motion.div>
+                  {tag}
+                </span>
               ))}
             </div>
-          </motion.div>
-        </div>
+
+  
+          </div>
+        </motion.div>
       </div>
     </section>
-  );
+  )
 }

@@ -1,56 +1,35 @@
-import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiMail, FiArrowUp } from 'react-icons/fi';
-import Logo from './Logo';
-
-const socials = [
-  { icon: FiGithub, href: 'https://github.com/rohitsolanki01', label: 'GitHub' },
-  { icon: FiLinkedin, href: 'https://www.linkedin.com/in/rohit--solanki/', label: 'LinkedIn' },
-  { icon: FiMail, href: 'mailto:rohitsolanki0473@gmail.com', label: 'Email' },
-];
-
-export default function Footer() {
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
+﻿export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-background/30 mt-4">
-      <div className="max-w-6xl mx-auto px-6 py-10 sm:py-12">
-        <div className="grid md:grid-cols-2 gap-8 pb-8 border-b border-white/10">
+    <footer className="relative mt-10 border-t border-black/10 bg-white px-6 py-12 dark:border-white/10 dark:bg-neutral-950">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <Logo size={36} />
-            <div className="mt-6 flex gap-5 text-xs text-muted-foreground">
-              <a href="#projects" className="hover:text-primary transition-colors">Projects</a>
-              <a href="#about" className="hover:text-primary transition-colors">About Me</a>
-              <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
-            </div>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-black p-1.5 shadow-lg shadow-cyan-500/20 ring-1 ring-cyan-300/50 dark:ring-cyan-300/40">
+                <img
+                  src="/logo1.svg"
+                  alt="Rohit logo"
+                  className="h-full w-full scale-[2.3] object-contain object-center brightness-110 contrast-125 saturate-125"
+                />
+              </span>
 
-            <div className="mt-5 flex items-center gap-2.5">
-              {socials.map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg border border-white/10 bg-white/5 text-muted-foreground/70 hover:text-primary transition-colors" aria-label={s.label}>
-                  <s.icon size={14} />
-                </a>
-              ))}
             </div>
-          </div>
-
-          <div className="md:text-right">
-            <p className="text-[1.9rem] sm:text-[2.55rem] font-[Sora] font-semibold leading-tight">
-              Is there a fascinating
-              <span className="font-serif italic text-primary"> project </span>
-              brewing in your mind?
+            <p className="max-w-xs text-xs text-neutral-500 dark:text-white/40">
+              Designed & built with obsession by Rohit Solanki. © 2025. All rights reserved.
             </p>
-            <a href="mailto:rohitsolanki0473@gmail.com" className="mt-5 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
-              <FiMail size={15} /> rohitsolanki0473@gmail.com
-            </a>
+          </div>
+          <div className="flex items-center gap-6 text-xs text-neutral-500 dark:text-white/50">
+            <a href="https://d8it4huxumps7.cloudfront.net/uploads/attachements/user-resumes/69e6007282c02_Rohit_Solanki_MERN_Developer.pdf" className="transition-colors hover:text-neutral-900 dark:hover:text-white" data-cursor="hover">Resume ↗</a>
+            <a href="https://github.com/rohitsolanki01" className="transition-colors hover:text-neutral-900 dark:hover:text-white" data-cursor="hover">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/rohit--solanki/" className="transition-colors hover:text-neutral-900 dark:hover:text-white" data-cursor="hover">LinkedIn ↗</a>
+            <a href="https://x.com/Rohit_01_tech" className="transition-colors hover:text-neutral-900 dark:hover:text-white" data-cursor="hover">Twitter ↗</a>
           </div>
         </div>
-
-        <div className="mt-5 flex items-center justify-between">
-          <p className="text-xs text-muted-foreground/60">Designed by Rohit · {new Date().getFullYear()}</p>
-          <motion.button whileHover={{ y: -2 }} onClick={scrollToTop} className="p-2 rounded-lg border border-white/10 bg-white/5 text-muted-foreground/70 hover:text-primary transition-colors" aria-label="Back to top">
-            <FiArrowUp size={15} />
-          </motion.button>
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-2 border-t border-black/10 pt-6 font-mono text-[11px] text-neutral-500 dark:border-white/10 dark:text-white/30">
+          <span>v3.0.0 — Crafted in India · Available worldwide</span>
+          <span>Press <kbd className="rounded border border-black/10 bg-white/80 px-1 py-0.5 dark:border-white/10 dark:bg-white/5">⌘K</kbd> anywhere</span>
         </div>
       </div>
     </footer>
-  );
-}
+  )
+} 

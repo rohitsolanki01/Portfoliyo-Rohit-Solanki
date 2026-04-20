@@ -1,181 +1,258 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { FiGithub, FiExternalLink, FiArrowRight } from 'react-icons/fi';
+﻿import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
 
 const projects = [
   {
+    year: '2026',
     title: 'StackMeet',
-    emoji: '🤝',
-    color: '#22d3ee',
-    description: 'A developer networking platform where engineers showcase their stack, discover collaborators, connect, and chat in real time.',
-    highlights: [
-      'JWT cookie auth, protected/public routing, and secure password reset flow',
-      'Explore feed with filters, connection requests/reviews, and accepted-connections graph',
-      '1:1 realtime chat + notifications using Socket.IO with HTTP fallback support',
-    ],
+    tagline: 'A developer networking platform with realtime collaboration',
+    description: 'A platform where engineers showcase their stack, discover collaborators, connect, and chat in real time. Includes JWT cookie auth, protected/public routes, secure password reset flow, explore feed filters, connection requests, accepted-connections graph, and Socket.IO chat with HTTP fallback.',
     tech: ['React 19', 'Vite', 'Redux Toolkit', 'Node.js', 'Express 5', 'MongoDB', 'Mongoose', 'Socket.IO', 'Cloudinary', 'JWT'],
-    github: 'https://github.com/rohitsolanki01',
-    live: 'https://www.stackmeet.tech/',
-    screenshot: '/images/projects/stackmeet.png',
+    gradient: 'from-violet-600 via-purple-600 to-cyan-500',
+    emoji: '🤝',
+    metrics: [{ label: 'Auth', value: 'JWT + Cookies' }, { label: 'Chat', value: 'Realtime 1:1' }, { label: 'Routing', value: 'Protected/Public' }],
+    liveUrl: 'https://www.stackmeet.tech/',
+    sourceUrl: 'https://github.com/rohitsolanki01/stackmeet',
   },
   {
+    year: '2025',
     title: 'Tranquvest',
-    emoji: '💵',
-    color: '#fb923c',
-    description: 'A full-stack trading platform that allows users to buy and sell real stocks at live market prices with real-time market feeds.',
+    tagline: 'A full-stack trading platform with live market feeds',
+    description: 'A full-stack trading platform that allows users to buy and sell real stocks at live market prices with realtime market feeds.',
     tech: ['React', 'Express', 'Node.js', 'MongoDB', 'Chart.js', 'Google Auth'],
-    github: 'https://github.com/rohitsolanki01/Tranquvest',
-    live: 'https://treding-app-tranquvest.vercel.app/',
-    screenshot: '/images/projects/tranquvest.png',
+    gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
+    emoji: '💵',
+    metrics: [{ label: 'Experience', value: 'Full-stack' }, { label: 'Prices', value: 'Live Market' }, { label: 'Charts', value: 'Realtime' }],
+    liveUrl: 'https://treding-app-tranquvest.vercel.app/',
+    sourceUrl: 'https://github.com/rohitsolanki01/Treding---app---Tranquvest',
   },
   {
+    year: '2025',
     title: 'Nestigo',
-    emoji: '🌍',
-    color: '#34d399',
-    description: 'A comprehensive vacation rental platform connecting travelers with unique accommodations worldwide. Features secure booking and host management.',
+    tagline: 'A global vacation rental and booking platform',
+    description: 'A comprehensive vacation rental platform connecting travelers with unique accommodations worldwide, with secure booking and host management.',
     tech: ['MongoDB', 'Express', 'EJS', 'Node.js', 'JWT', 'Bootstrap'],
-    github: 'https://github.com/rohitsolanki01/Nestigo',
-    live: 'https://nestigo.onrender.com/',
-    screenshot: '/images/projects/nestigo.png',
+    gradient: 'from-indigo-600 via-violet-600 to-fuchsia-500',
+    emoji: '🌍',
+    metrics: [{ label: 'Platform', value: 'Rental + Booking' }, { label: 'Security', value: 'JWT Auth' }, { label: 'Roles', value: 'Host + Traveler' }],
+    liveUrl: 'https://nestigo.onrender.com/',
+    sourceUrl: 'https://github.com/rohitsolanki01/Nestigo',
   },
   {
+    year: '2024',
     title: 'Weather Dashboard',
+    tagline: 'Realtime weather app with dynamic visual feedback',
+    description: 'Realtime weather application with dynamic backgrounds and detailed forecasts powered by the OpenWeather API.',
+    tech: ['React', 'OpenWeather API', 'Tailwind CSS', 'Responsive UI'],
+    gradient: 'from-sky-500 via-cyan-500 to-blue-600',
     emoji: '🌤️',
-    color: '#38bdf8',
-    description: 'Real-time weather application with dynamic backgrounds and detailed forecasts using OpenWeather API.',
-    tech: ['React', 'OpenWeather API', 'Tailwind CSS', 'Responsive'],
-    github: 'https://github.com/rohitsolanki01/Weather_App-',
-    live: null,
-    screenshot: null,
+    metrics: [{ label: 'Data', value: 'Live Weather' }, { label: 'UX', value: 'Dynamic Backgrounds' }, { label: 'Design', value: 'Responsive' }],
+    liveUrl: '#',
+    sourceUrl: 'https://github.com/rohitsolanki01/Weather_App-',
   },
   {
+    year: '2024',
     title: 'ShortIt',
-    emoji: '🔗',
-    color: '#c084fc',
-    description: 'A sleek URL shortening service with dual API support for instant short links and click analytics.',
+    tagline: 'A sleek URL shortener with analytics-ready link flows',
+    description: 'A URL shortening service with dual API support for instant short links and click analytics.',
     tech: ['React', 'Tailwind CSS', 'API Integration'],
-    github: 'https://github.com/rohitsolanki01/ShortIt',
-    live: 'https://short-it-kappa.vercel.app/',
-    screenshot: '/images/projects/shortit.png',
+    gradient: 'from-orange-500 via-amber-500 to-yellow-400',
+    emoji: '🔗',
+    metrics: [{ label: 'Links', value: 'Instant Shortening' }, { label: 'Insights', value: 'Click Analytics' }, { label: 'Support', value: 'Dual API' }],
+    liveUrl: 'https://short-it-kappa.vercel.app/',
+    sourceUrl: 'https://github.com/rohitsolanki01/ShortIt',
   },
-];
+]
+
+function ProjectCard({ p, i, onOpen }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.8, delay: (i % 2) * 0.15 }}
+      onClick={() => onOpen(p)}
+      className="group relative cursor-pointer"
+      data-cursor="hover"
+    >
+      <div className="relative glass rounded-3xl overflow-hidden border-gradient transition-all duration-500 group-hover:-translate-y-2">
+        <div className={`relative h-64 md:h-72 bg-linear-to-br ${p.gradient} overflow-hidden noise`}>
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 dot-grid opacity-20" />
+
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center text-8xl"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            {p.emoji}
+          </motion.div>
+
+          <div className="absolute top-5 left-5 glass-strong rounded-full px-3 py-1 text-[10px] font-mono uppercase tracking-wider">
+            {p.year}
+          </div>
+          <div className="absolute top-5 right-5 w-9 h-9 glass-strong rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:-rotate-45">
+            <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" />
+            </svg>
+          </div>
+
+          {/* shine */}
+          <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+        </div>
+
+        <div className="p-7">
+          <h3 className="font-display text-2xl font-bold tracking-tight mb-1.5 group-hover:gradient-text transition-all">
+            {p.title}
+          </h3>
+          <p className="text-sm text-white/60 mb-5">{p.tagline}</p>
+
+          <div className="flex flex-wrap gap-1.5">
+            {p.tech.map((t) => (
+              <span key={t} className="text-[11px] px-2.5 py-1 rounded-md glass text-white/60 font-mono">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 export default function Projects() {
-  const prefersReducedMotion = useReducedMotion();
+  const [active, setActive] = useState(null)
 
   return (
-    <section id="projects" className="py-14 sm:py-18 lg:py-20 relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.6 }}>
-          <span className="section-badge">Featured Projects</span>
-          <h2 className="section-title max-w-4xl">
-            Design Brands That <span className="gradient-text">Speak To Audiences</span>
-          </h2>
-          <p className="section-copy text-sm sm:text-base">Each product is crafted with strong visual direction and practical engineering behind the scenes.</p>
+    <section id="projects" className="relative bg-white px-6 py-28 dark:bg-neutral-950">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="flex items-end justify-between flex-wrap gap-6 mb-16"
+        >
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="font-mono text-xs text-purple-400">03</span>
+              <span className="h-px w-8 bg-purple-400/40" />
+              <span className="text-xs uppercase tracking-[0.3em] text-white/50">Selected Work</span>
+            </div>
+            <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-neutral-900 dark:text-white">
+              Projects I am{' '}
+              <span className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text italic text-transparent dark:from-violet-400 dark:to-cyan-300">
+                proud
+              </span>{' '}
+              of.
+            </h2>
+          </div>
+          <a href="#" className="text-sm text-neutral-500 hover:text-neutral-900 dark:text-white/60 dark:hover:text-white transition-colors flex items-center gap-2 font-mono" data-cursor="hover">
+            All projects
+            <span>→</span>
+          </a>
         </motion.div>
 
-        <motion.div
-          className="grid sm:grid-cols-2 gap-4 sm:gap-6 mt-8 sm:mt-10"
-          initial={prefersReducedMotion ? undefined : 'hidden'}
-          whileInView={prefersReducedMotion ? undefined : 'visible'}
-          viewport={{ once: true, margin: '-80px' }}
-          variants={
-            prefersReducedMotion
-              ? undefined
-              : {
-                  hidden: { opacity: 0 },
-                  visible: { opacity: 1, transition: { staggerChildren: 0.09 } },
-                }
-          }
-        >
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           {projects.map((p, i) => (
-            <motion.div key={p.title} initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={prefersReducedMotion ? undefined : { y: -8, scale: 1.01 }}
-              className="group reference-panel rounded-3xl overflow-hidden flex flex-col">
+            <ProjectCard key={p.title} p={p} i={i} onOpen={setActive} />
+          ))}
+        </div>
+      </div>
 
-              {p.screenshot ? (
-                <div className="relative aspect-[16/9] overflow-hidden bg-secondary/20 border-b border-white/10">
-                  <img
-                    src={p.screenshot}
-                    alt={`${p.title} preview`}
-                    className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/75 via-transparent to-transparent" />
-                  <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-red-400/70" />
-                    <span className="w-2 h-2 rounded-full bg-amber-400/70" />
-                    <span className="w-2 h-2 rounded-full bg-green-400/70" />
-                  </div>
+      <AnimatePresence>
+        {active && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActive(null)}
+            className="fixed inset-0 z-100 bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 md:p-6 overflow-y-auto"
+          >
+            <motion.div
+              initial={{ scale: 0.92, opacity: 0, y: 40 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.92, opacity: 0, y: 20 }}
+              transition={{ type: 'spring', damping: 28, stiffness: 260 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative glass-strong rounded-3xl max-w-3xl w-full overflow-hidden border-gradient my-10"
+            >
+              <div className={`h-72 md:h-80 bg-linear-to-br ${active.gradient} relative flex items-center justify-center noise`}>
+                <div className="absolute inset-0 bg-black/20" />
+                <div className="absolute inset-0 dot-grid opacity-25" />
+                <span className="text-9xl relative">{active.emoji}</span>
+              </div>
+              <button
+                onClick={() => setActive(null)}
+                className="absolute top-5 right-5 w-10 h-10 rounded-full glass-strong flex items-center justify-center hover:rotate-90 transition-transform"
+                data-cursor="hover"
+              >
+                ✕
+              </button>
+
+              <div className="p-8 md:p-10">
+                <div className="flex items-center gap-3 mb-4 text-xs font-mono text-white/50">
+                  <span>{active.year}</span>
+                  <span>·</span>
+                  <span>Case Study</span>
                 </div>
-              ) : (
-                <div className="px-4 sm:px-5 pt-3 sm:pt-4 pb-2.5 sm:pb-3 bg-black/25 border-b border-white/10">
-                  <div className="flex items-center gap-1.5 mb-2">
-                    <span className="w-2 h-2 rounded-full bg-red-400/70" />
-                    <span className="w-2 h-2 rounded-full bg-amber-400/70" />
-                    <span className="w-2 h-2 rounded-full bg-green-400/70" />
-                    <span className="ml-2 text-[9px] text-muted-foreground/40 font-mono truncate">{p.title.toLowerCase()}</span>
-                  </div>
-                  <div className="font-mono text-[10px] sm:text-[11px] leading-relaxed space-y-0.5">
-                    <p className="text-primary">$ npm start</p>
-                    <p className="text-green-400">Compiled successfully ✓</p>
-                    <p className="text-cyan-400">Server running...</p>
-                  </div>
-                </div>
-              )}
+                <h3 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-3">{active.title}</h3>
+                <p className="text-white/70 text-lg leading-relaxed mb-8">{active.description}</p>
 
-              <div className="p-4 sm:p-5 flex-1 flex flex-col">
-                <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                  <span className="text-xl sm:text-2xl">{p.emoji}</span>
-                  <h3 className="text-base sm:text-lg font-bold font-[Sora] text-foreground group-hover:text-primary transition-colors">{p.title}</h3>
-                </div>
-
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed flex-1">{p.description}</p>
-
-                {p.highlights && (
-                  <ul className="mt-3 space-y-1.5 text-[11px] sm:text-xs text-muted-foreground/90">
-                    {p.highlights.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary/80 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-3 sm:mt-4">
-                  {p.tech.map((t) => (
-                    <span key={t} className="px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px] font-medium rounded-md bg-gradient-to-r from-primary/20 to-accent/20 text-primary border border-white/10">{t}</span>
+                <div className="grid grid-cols-3 gap-4 mb-8">
+                  {active.metrics.map((m) => (
+                    <div key={m.label} className="glass rounded-2xl p-4">
+                      <div className="font-display text-2xl font-bold gradient-text">{m.value}</div>
+                      <div className="text-xs uppercase tracking-wider text-white/50 mt-1">{m.label}</div>
+                    </div>
                   ))}
                 </div>
 
-                <div className="flex items-center justify-between mt-3 sm:mt-4 pt-3 border-t border-white/10">
-                  <div className="flex gap-3">
-                    {p.github && (
-                      <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="GitHub">
-                        <FiGithub size={14} />
-                      </a>
-                    )}
-                    {p.live && (
-                      <a href={p.live} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Live demo">
-                        <FiExternalLink size={14} />
-                      </a>
-                    )}
-                  </div>
-                  {(p.live || p.github) && (
-                    <a href={p.live || p.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-[10px] sm:text-xs font-medium text-muted-foreground hover:text-primary group-hover:text-primary transition-colors uppercase tracking-[0.08em]">
-                      Explore <FiArrowRight size={11} className="group-hover:translate-x-1 transition-transform" />
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {active.tech.map((t) => (
+                    <span key={t} className="text-xs px-3 py-1.5 rounded-md glass text-white/70 font-mono">{t}</span>
+                  ))}
+                </div>
+
+                <div className="flex gap-3 flex-wrap">
+                  {active.liveUrl && active.liveUrl !== '#' ? (
+                    <a
+                      href={active.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-colors"
+                      data-cursor="hover"
+                    >
+                      Visit live
+                      <span>→</span>
                     </a>
+                  ) : (
+                    <span className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/70 text-black text-sm font-medium cursor-not-allowed">
+                      Live soon
+                    </span>
+                  )}
+
+                  {active.sourceUrl && active.sourceUrl !== '#' ? (
+                    <a
+                      href={active.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-strong text-sm font-medium hover:bg-white/10 transition-colors"
+                      data-cursor="hover"
+                    >
+                      Source code
+                    </a>
+                  ) : (
+                    <span className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-strong text-sm font-medium text-white/60 cursor-not-allowed">
+                      Private code
+                    </span>
                   )}
                 </div>
               </div>
             </motion.div>
-          ))}
-        </motion.div>
-
-        <div className="text-center mt-7">
-          <a href="#contact" className="accent-link">Load More</a>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
-  );
+  )
 }
