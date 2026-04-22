@@ -23,7 +23,7 @@ export default function Navbar({ onCmdOpen }) {
       <nav
         className={`flex w-full max-w-6xl items-center justify-between rounded-2xl border px-3 py-2 transition-all duration-500 ${
           scrolled
-            ? 'border-black/10 bg-white/80 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-neutral-900/80'
+            ? 'border-black/10 bg-white/80 shadow-xl backdrop-blur-lg dark:border-white/10 dark:bg-neutral-900/80'
             : 'border-transparent bg-transparent'
         }`}
       >

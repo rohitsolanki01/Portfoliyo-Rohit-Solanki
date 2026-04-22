@@ -9,17 +9,29 @@ export default function CustomCursor() {
   const sy = useSpring(y, { damping: 25, stiffness: 300, mass: 0.5 })
 
   useEffect(() => {
-    const move = (e) => { x.set(e.clientX); y.set(e.clientY) }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+
+    let raf = null
+    const move = (e) => {
+      if (raf) return
+      const { clientX, clientY } = e
+      raf = requestAnimationFrame(() => {
+        x.set(clientX)
+        y.set(clientY)
+        raf = null
+      })
+    }
     const over = (e) => {
       if (e.target.closest('a, button, [data-cursor="hover"], input, textarea')) setHovering(true)
     }
     const out = (e) => {
       if (e.target.closest('a, button, [data-cursor="hover"], input, textarea')) setHovering(false)
     }
-    window.addEventListener('mousemove', move)
+    window.addEventListener('mousemove', move, { passive: true })
     document.addEventListener('mouseover', over)
     document.addEventListener('mouseout', out)
     return () => {
+      if (raf) cancelAnimationFrame(raf)
       window.removeEventListener('mousemove', move)
       document.removeEventListener('mouseover', over)
       document.removeEventListener('mouseout', out)

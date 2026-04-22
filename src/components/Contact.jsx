@@ -55,7 +55,7 @@ export default function Contact() {
           className="relative"
         >
           <div className="absolute -inset-2 rounded-3xl bg-linear-to-r from-purple-500/30 via-blue-500/20 to-cyan-400/30 blur-3xl opacity-60" />
-          <form onSubmit={submit} className="relative space-y-5 rounded-3xl border border-black/10 bg-white/90 p-8 backdrop-blur-xl md:p-10 dark:border-white/10 dark:bg-white/5">
+          <form onSubmit={submit} className="relative space-y-5 rounded-3xl border border-black/10 bg-white/90 p-8 backdrop-blur-lg md:p-10 dark:border-white/10 dark:bg-white/5">
             <div className="grid md:grid-cols-2 gap-5">
               <div className="space-y-2">
                 <label className="font-mono text-[11px] uppercase tracking-[0.2em] text-neutral-500 dark:text-white/50">Name</label>

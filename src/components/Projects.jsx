@@ -167,7 +167,7 @@ export default function Projects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActive(null)}
-            className="fixed inset-0 z-100 bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 md:p-6 overflow-y-auto"
+            className="fixed inset-0 z-100 bg-black/80 backdrop-blur-lg flex items-center justify-center p-4 md:p-6 overflow-y-auto"
           >
             <motion.div
               initial={{ scale: 0.92, opacity: 0, y: 40 }}

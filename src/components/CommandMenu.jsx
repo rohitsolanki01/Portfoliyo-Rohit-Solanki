@@ -30,7 +30,7 @@ export default function CommandMenu({ open, setOpen }) {
             exit={{ scale: 0.95, opacity: 0, y: -10 }}
             transition={{ type: 'spring', damping: 24 }}
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-lg overflow-hidden rounded-2xl border border-black/10 bg-white/90 shadow-2xl backdrop-blur-xl dark:border-white/10 dark:bg-neutral-900/90"
+            className="w-full max-w-lg overflow-hidden rounded-2xl border border-black/10 bg-white/90 shadow-2xl backdrop-blur-lg dark:border-white/10 dark:bg-neutral-900/90"
           >
             <div className="flex items-center gap-3 border-b border-black/10 px-5 py-4 dark:border-white/10">
               <svg className="h-4 w-4 text-neutral-500 dark:text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,5 +1,15 @@
 ﻿import { motion } from 'framer-motion'
 import { useRef } from 'react'
+import {
+  Code2,
+  Smartphone,
+  Palette,
+  Wrench,
+  ServerCog,
+  Github,
+  Database,
+} from 'lucide-react'
+import { Radar, IconContainer } from './ui/radar-effect'
 
 const groups = [
   {
@@ -81,7 +91,7 @@ function SkillCard({ group, i }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.7, delay: i * 0.1 }}
-      className="spotlight-card rounded-3xl border border-black/10 bg-white/80 p-8 backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
+      className="spotlight-card rounded-3xl border border-black/10 bg-white/80 p-8 backdrop-blur-lg dark:border-white/10 dark:bg-white/5"
     >
       <div className="flex items-center gap-3 mb-6">
         <span className="font-mono text-xs text-violet-500">{group.num}</span>
@@ -139,6 +149,102 @@ export default function Skills() {
             <SkillCard key={group.title} group={group} i={i} />
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.9, delay: 0.08 }}
+          className="relative mt-14 overflow-hidden rounded-3xl border border-black/10 bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_45%),radial-gradient(circle_at_bottom,rgba(124,58,237,0.14),transparent_50%)] px-4 py-10 dark:border-white/10"
+        >
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute -left-20 top-0 h-56 w-56 rounded-full bg-cyan-500/20 blur-3xl"
+            animate={{ x: [0, 40, 0], y: [0, 28, 0], opacity: [0.3, 0.55, 0.3] }}
+            transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+          />
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute -right-24 bottom-2 h-64 w-64 rounded-full bg-violet-500/20 blur-3xl"
+            animate={{ x: [0, -36, 0], y: [0, -26, 0], opacity: [0.25, 0.5, 0.25] }}
+            transition={{ duration: 9, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+          />
+
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.16 }}
+            className="relative z-20 mx-auto mb-6 max-w-2xl text-center"
+          >
+            <p className="text-xs uppercase tracking-[0.28em] text-cyan-600 dark:text-cyan-300">Capability Radar</p>
+            <h3 className="mt-3 text-2xl font-semibold text-slate-900 md:text-3xl dark:text-slate-100">
+              How my core skills connect across product delivery
+            </h3>
+          </motion.div>
+
+          <div className="mx-auto flex h-120 w-full max-w-3xl flex-col items-center justify-center space-y-4 overflow-hidden">
+            <div className="mx-auto w-full max-w-3xl">
+              <div className="flex w-full items-center justify-center space-x-10 md:justify-between md:space-x-0">
+                <IconContainer
+                  text="Web Development"
+                  delay={0.2}
+                  scanOffset={0.2}
+                  icon={<Code2 className="h-7 w-7 text-slate-300" />}
+                />
+                <IconContainer
+                  delay={0.4}
+                  text="Mobile Apps"
+                  scanOffset={1.55}
+                  icon={<Smartphone className="h-7 w-7 text-slate-300" />}
+                />
+                <IconContainer
+                  text="UI Design"
+                  delay={0.3}
+                  scanOffset={0.95}
+                  icon={<Palette className="h-7 w-7 text-slate-300" />}
+                />
+              </div>
+            </div>
+
+            <div className="mx-auto w-full max-w-md">
+              <div className="flex w-full items-center justify-center space-x-10 md:justify-between md:space-x-0">
+                <IconContainer
+                  text="Maintenance"
+                  delay={0.5}
+                  scanOffset={3.25}
+                  icon={<Wrench className="h-7 w-7 text-slate-300" />}
+                />
+                <IconContainer
+                  text="Infra Ops"
+                  delay={0.8}
+                  scanOffset={2.55}
+                  icon={<ServerCog className="h-7 w-7 text-slate-300" />}
+                />
+              </div>
+            </div>
+
+            <div className="mx-auto w-full max-w-3xl">
+              <div className="flex w-full items-center justify-center space-x-10 md:justify-between md:space-x-0">
+                <IconContainer
+                  delay={0.6}
+                  text="GitHub Workflow"
+                  scanOffset={4.8}
+                  icon={<Github className="h-7 w-7 text-slate-300" />}
+                />
+                <IconContainer
+                  delay={0.7}
+                  text="Data Layer"
+                  scanOffset={5.5}
+                  icon={<Database className="h-7 w-7 text-slate-300" />}
+                />
+              </div>
+            </div>
+
+            <Radar className="absolute -bottom-12" />
+            <div className="absolute bottom-0 z-41 h-px w-full bg-linear-to-r from-transparent via-slate-700 to-transparent" />
+          </div>
+        </motion.div>
       </div>
     </section>
   )
