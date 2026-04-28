@@ -5,11 +5,11 @@
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-lg bg-black p-1.5 shadow-lg shadow-cyan-500/20 ring-1 ring-cyan-300/50 dark:ring-cyan-300/40">
+              <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-lg bg-black p-1 shadow-lg shadow-cyan-500/20 ring-1 ring-cyan-300/50 dark:ring-cyan-300/40">
                 <img
-                  src="/logo1.svg"
+                  src="/logo.svg"
                   alt="Rohit logo"
-                  className="h-full w-full scale-[2.3] object-contain object-center brightness-110 contrast-125 saturate-125"
+                  className="h-full w-full object-contain object-center brightness-110 contrast-125 saturate-125"
                 />
               </span>
 

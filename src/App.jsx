@@ -2,8 +2,7 @@
 import Preloader from './components/Preloader'
 import CustomCursor from './components/CustomCursor'
 import Navbar from './components/Navbar'
-import { HeroRohit } from './components/sections/hero-rohit'
-import Marquee from './components/Marquee'
+import { HeroGeometric } from './components/ui/shape-landing-hero'
 import About from './components/About'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
@@ -42,10 +41,10 @@ export default function App() {
       <CommandMenu open={cmdOpen} setOpen={setCmdOpen} />
       <Navbar onCmdOpen={() => setCmdOpen(true)} />
       <main className="relative">
-        <HeroRohit
-          tagline="From Sketch to Scale"
-          firstLine="I Build"
-          secondLine="the Web You Imagine"
+        <HeroGeometric
+          badge="From Sketch to Scale"
+          title1="I Build"
+          title2="the Web You Imagine"
           description="Full Stack Developer and React Engineer shipping polished interfaces and stable APIs with measurable business impact."
           stats={[
             { value: '5+', label: 'Projects Completed' },
@@ -63,12 +62,11 @@ export default function App() {
             window.location.href = "mailto:rohit@example.com?subject=Let's work together"
           }}
         />
-        <Marquee />
+        <Stats />
         <About />
         <Skills />
         <Projects />
         <Experience />
-        <Stats />
         <Testimonials />
         <Github />
         <Contact />

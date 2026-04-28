@@ -4,51 +4,162 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Download, Mail } from "lucide-react";
 
-function FloatingPaths({ position }) {
-  const paths = Array.from({ length: 36 }, (_, i) => ({
-    id: i,
-    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
-      380 - i * 5 * position
-    } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
-      152 - i * 5 * position
-    } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
-      684 - i * 5 * position
-    } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-    width: 0.5 + i * 0.03,
-  }));
-
+// Premium Aurora Background - luxury gradient effect
+function AuroraBackground() {
   return (
-    <div className="absolute inset-0 pointer-events-none">
-      <svg
-        className="w-full h-full text-slate-950 dark:text-white"
-        viewBox="0 0 696 316"
-        fill="none"
-      >
-        <title>Background Paths</title>
-        {paths.map((path) => (
-          <motion.path
-            key={path.id}
-            d={path.d}
-            stroke="currentColor"
-            strokeWidth={path.width}
-            strokeOpacity={0.1 + path.id * 0.03}
-            initial={{ pathLength: 0.3, opacity: 0.6 }}
-            animate={{
-              pathLength: 1,
-              opacity: [0.3, 0.6, 0.3],
-              pathOffset: [0, 1, 0],
-            }}
-            transition={{
-              duration: 20 + Math.random() * 10,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "linear",
-            }}
-          />
-        ))}
-      </svg>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Aurora gradient layers - smooth flowing motion */}
+      <div className="absolute inset-0 opacity-30 dark:opacity-50">
+        {/* Layer 1: Cyan to Violet aurora */}
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: `
+              linear-gradient(90deg,
+                rgba(6, 182, 212, 0.4) 0%,
+                rgba(34, 197, 94, 0.2) 25%,
+                rgba(139, 92, 246, 0.3) 50%,
+                rgba(168, 85, 247, 0.2) 75%,
+                rgba(6, 182, 212, 0.4) 100%
+              )
+            `,
+            backgroundSize: "200% 100%",
+            backgroundPosition: "0% 50%",
+          }}
+          animate={{
+            backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+
+        {/* Layer 2: Animated radial gradient for depth */}
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(circle at 40% 50%,
+                rgba(6, 182, 212, 0.25) 0%,
+                rgba(139, 92, 246, 0.15) 30%,
+                transparent 70%
+              )
+            `,
+          }}
+          animate={{
+            opacity: [0.4, 0.8, 0.4],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </div>
+
+      {/* Premium glow orbs for luxury effect */}
+      {/* Cyan glow - top left */}
+      <motion.div
+        className="absolute w-96 h-96 rounded-full blur-3xl"
+        style={{
+          background: "radial-gradient(circle, rgba(6, 182, 212, 0.3), transparent 70%)",
+          top: "-10%",
+          left: "-5%",
+        }}
+        animate={{
+          scale: [0.95, 1.1, 0.95],
+          opacity: [0.4, 0.7, 0.4],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* Violet glow - bottom right */}
+      <motion.div
+        className="absolute w-80 h-80 rounded-full blur-3xl"
+        style={{
+          background: "radial-gradient(circle, rgba(168, 85, 247, 0.25), transparent 70%)",
+          bottom: "-8%",
+          right: "-2%",
+        }}
+        animate={{
+          scale: [1.05, 0.95, 1.05],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.5,
+        }}
+      />
+
+      {/* Emerald accent - center right */}
+      <motion.div
+        className="absolute w-72 h-72 rounded-full blur-3xl"
+        style={{
+          background: "radial-gradient(circle, rgba(34, 197, 94, 0.2), transparent 70%)",
+          top: "30%",
+          right: "15%",
+        }}
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.2, 0.5, 0.2],
+        }}
+        transition={{
+          duration: 16,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        }}
+      />
+
+      {/* Vignette overlay for depth */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(circle at center,
+              rgba(255, 255, 255, 0) 0%,
+              rgba(0, 0, 0, 0.05) 100%
+            )
+          `,
+        }}
+      />
+
+      {/* Dark mode overlay */}
+      <div className="absolute inset-0 dark:bg-neutral-950/20 pointer-events-none" />
     </div>
   );
 }
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.23, 1, 0.32, 1],
+    },
+  },
+};
 
 export function HeroRohit({
   tagline = "From Sketch to Scale",
@@ -69,173 +180,205 @@ export function HeroRohit({
 
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white dark:bg-neutral-950 py-20">
-      <div className="absolute inset-0">
-        <FloatingPaths position={1} />
-        <FloatingPaths position={-1} />
-      </div>
+      {/* Aurora background */}
+      <AuroraBackground />
 
+      {/* Content */}
       <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
           className="max-w-5xl mx-auto"
         >
+          {/* Status badge with animation */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full 
-              bg-gradient-to-b from-black/5 to-black/0 dark:from-white/10 dark:to-white/0
-              border border-black/10 dark:border-white/10 backdrop-blur-sm"
+            variants={itemVariants}
+            className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full 
+              border border-black/10 dark:border-white/10 bg-white/40 dark:bg-white/5 
+              backdrop-blur-xl hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-300"
           >
-            <Sparkles className="h-3.5 w-3.5 text-neutral-700 dark:text-neutral-300" />
+            <motion.span
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="flex h-2.5 w-2.5 rounded-full bg-cyan-500"
+            />
             <span className="text-xs font-medium text-neutral-700 dark:text-neutral-300 tracking-wide">
               {tagline}
             </span>
           </motion.div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tighter leading-[1.05]">
-            {titleWords.map((line, lineIndex) => (
-              <span key={lineIndex} className="block">
-                {line.split(" ").map((word, wordIndex) => (
-                  <span
-                    key={`${lineIndex}-${wordIndex}`}
-                    className="inline-block mr-3 last:mr-0"
+          {/* Main headline with letter spacing reveal */}
+          <div className="mb-8 overflow-hidden">
+            <motion.h1 
+              variants={itemVariants}
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-[5.5rem] font-bold tracking-tighter leading-[1.1]"
+            >
+              {titleWords.map((line, lineIndex) => (
+                <div key={lineIndex} className="overflow-hidden">
+                  <motion.span
+                    className="block text-transparent bg-clip-text bg-linear-to-r 
+                      from-neutral-900 via-neutral-800 to-neutral-700
+                      dark:from-white dark:via-white dark:to-neutral-200"
+                    initial={{ y: 60 }}
+                    animate={{ y: 0 }}
+                    transition={{
+                      delay: 0.5 + lineIndex * 0.2,
+                      duration: 0.8,
+                      ease: [0.23, 1, 0.32, 1],
+                    }}
                   >
-                    {word.split("").map((letter, letterIndex) => (
-                      <motion.span
-                        key={`${lineIndex}-${wordIndex}-${letterIndex}`}
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{
-                          delay:
-                            0.5 +
-                            lineIndex * 0.2 +
-                            wordIndex * 0.08 +
-                            letterIndex * 0.025,
-                          type: "spring",
-                          stiffness: 150,
-                          damping: 25,
-                        }}
-                        className="inline-block text-transparent bg-clip-text 
-                          bg-gradient-to-r from-neutral-900 to-neutral-700/80 
-                          dark:from-white dark:to-white/80"
-                      >
-                        {letter}
-                      </motion.span>
-                    ))}
-                  </span>
-                ))}
-              </span>
-            ))}
-          </h1>
+                    {line}
+                  </motion.span>
+                </div>
+              ))}
+            </motion.h1>
+          </div>
 
+          {/* Subtitle with refined animation */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.6, duration: 0.8 }}
-            className="text-base md:text-lg lg:text-xl text-neutral-600 dark:text-neutral-400 mb-12 max-w-2xl mx-auto leading-relaxed"
+            variants={itemVariants}
+            className="text-lg md:text-xl lg:text-2xl text-neutral-600 dark:text-neutral-300 
+              mb-12 max-w-3xl mx-auto leading-relaxed font-light"
           >
             {description}
           </motion.p>
 
+          {/* Stats section with stagger */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.8, duration: 0.8 }}
-            className="flex items-center justify-center gap-8 md:gap-14 mb-12"
+            variants={itemVariants}
+            className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 mb-16"
           >
             {stats.map((stat, i) => (
-              <div key={i} className="flex items-center gap-4">
-                {i > 0 && (
-                  <div className="h-10 w-px bg-neutral-300 dark:bg-neutral-700 -ml-4 md:-ml-7" />
-                )}
-                <div className="text-left">
-                  <div className="text-3xl md:text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-neutral-900 to-neutral-600 dark:from-white dark:to-neutral-300">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
-                    {stat.label}
-                  </div>
+              <motion.div
+                key={i}
+                className="flex flex-col items-center"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  delay: 1.2 + i * 0.1,
+                  duration: 0.6,
+                  ease: "easeOut",
+                }}
+              >
+                <div className="text-4xl md:text-5xl font-bold tracking-tighter text-transparent 
+                  bg-clip-text bg-linear-to-r from-cyan-600 to-violet-600 
+                  dark:from-cyan-400 dark:to-violet-400 mb-1">
+                  {stat.value}
                 </div>
-              </div>
+                <div className="text-sm text-neutral-500 dark:text-neutral-400 font-medium">
+                  {stat.label}
+                </div>
+              </motion.div>
             ))}
           </motion.div>
 
+          {/* CTA section with premium button design */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2, duration: 0.8 }}
-            className="flex flex-wrap items-center justify-center gap-4 mb-16"
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
-            <div
-              className="inline-block group relative bg-gradient-to-b from-black/10 to-white/10 
-                dark:from-white/10 dark:to-black/10 p-px rounded-2xl backdrop-blur-lg 
-                overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+            {/* Primary CTA with glow effect */}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative"
             >
+              <div className="absolute -inset-1 bg-linear-to-r from-cyan-600 to-violet-600 
+                rounded-2xl blur opacity-0 group-hover:opacity-30 transition-all duration-500" />
               <Button
                 onClick={onViewProjects}
-                variant="ghost"
-                className="rounded-[1.15rem] px-8 py-6 text-base font-semibold backdrop-blur-md 
-                  bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100 
-                  text-black dark:text-white transition-all duration-300 
-                  group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10
-                  hover:shadow-md dark:hover:shadow-neutral-800/50"
+                className="relative rounded-2xl px-8 py-6 text-base font-semibold
+                  bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-50
+                  text-white dark:text-black transition-all duration-300
+                  flex items-center gap-3 shadow-lg hover:shadow-2xl"
               >
-                <span className="opacity-90 group-hover:opacity-100 transition-opacity">
-                  View Projects
-                </span>
-                <ArrowRight className="ml-3 h-5 w-5 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300" />
+                <span>View Case Studies</span>
+                <motion.div
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </motion.div>
               </Button>
-            </div>
+            </motion.div>
 
-            <Button
-              onClick={onResume}
-              variant="ghost"
-              className="rounded-2xl px-7 py-6 text-base font-medium text-neutral-700 
-                dark:text-neutral-300 hover:text-black dark:hover:text-white gap-2"
+            {/* Secondary CTA */}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Download className="h-4 w-4" />
-              Resume
-            </Button>
+              <Button
+                onClick={onResume}
+                variant="ghost"
+                className="rounded-2xl px-8 py-6 text-base font-medium
+                  text-neutral-700 dark:text-neutral-300 
+                  border border-neutral-300 dark:border-neutral-700
+                  hover:bg-neutral-100 dark:hover:bg-neutral-900
+                  transition-all duration-300 flex items-center gap-2"
+              >
+                <Download className="w-5 h-5" />
+                <span>Resume</span>
+              </Button>
+            </motion.div>
           </motion.div>
 
+          {/* Divider and footer CTA */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.3, duration: 0.8 }}
-            className="flex flex-col items-center gap-4 pt-8 border-t border-neutral-200/60 dark:border-neutral-800/60 max-w-md mx-auto"
+            variants={itemVariants}
+            className="flex flex-col items-center gap-6 pt-8"
           >
-            <div className="flex items-center gap-3">
-              <div className="relative w-11 h-11 rounded-full bg-gradient-to-br from-neutral-900 to-neutral-700 dark:from-white dark:to-neutral-300 flex items-center justify-center text-white dark:text-black font-bold text-sm shadow-lg">
+            <div className="w-12 h-px bg-linear-to-r from-transparent via-neutral-300 
+              dark:via-neutral-700 to-transparent" />
+
+            {/* Profile card */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              className="flex items-center gap-3 px-4 py-3 rounded-full 
+                bg-white/50 dark:bg-white/5 border border-neutral-200 dark:border-neutral-800
+                backdrop-blur-lg hover:bg-white/60 dark:hover:bg-white/10 transition-all duration-300"
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="w-10 h-10 rounded-full bg-linear-to-br from-cyan-500 to-violet-600 
+                  flex items-center justify-center text-white font-bold text-sm shrink-0"
+              >
                 RS
-                <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white dark:border-neutral-950" />
-              </div>
+              </motion.div>
               <div className="text-left">
                 <div className="font-semibold text-neutral-900 dark:text-white text-sm">
                   {name}
                 </div>
                 <div className="text-[11px] text-neutral-500 dark:text-neutral-400">
-                  Available for new opportunities
+                  Open to select projects
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 max-w-sm leading-relaxed">
-              {footerNote}
-            </p>
-
-            <Button
-              onClick={onHire}
-              className="mt-2 rounded-full px-6 py-5 text-sm font-semibold
-                bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-100
-                text-white dark:text-black transition-all duration-300
-                hover:-translate-y-0.5 hover:shadow-lg gap-2"
+            {/* Call to action */}
+            <motion.p
+              className="text-sm text-neutral-600 dark:text-neutral-400 max-w-sm"
             >
-              <Mail className="h-4 w-4" />
-              Hire Me
-            </Button>
+              {footerNote}
+            </motion.p>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button
+                onClick={onHire}
+                className="rounded-full px-7 py-4 text-sm font-semibold
+                  bg-linear-to-r from-cyan-600 to-violet-600 
+                  hover:from-cyan-700 hover:to-violet-700
+                  text-white transition-all duration-300
+                  shadow-lg hover:shadow-2xl flex items-center gap-2"
+              >
+                <Mail className="w-4 h-4" />
+                Let's Build Together
+              </Button>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>

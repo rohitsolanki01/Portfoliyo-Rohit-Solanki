@@ -1,0 +1,55 @@
+<svg width="48" height="48" viewBox="0 0 220 220"
+	xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<linearGradient id="g" x1="0%" y1="0%"
+			x2="100%" y2="100%">
+			<stop offset="0%" stop-color="#00FFD1"/>
+			<stop offset="100%" stop-color="#0066FF"/>
+		</linearGradient>
+		<clipPath id="sq">
+			<path d="M20 0 L200 0 L220 20
+							 L220 220 L0 220 L0 20 Z"/>
+		</clipPath>
+	</defs>
+
+	<path d="M20 0 L200 0 L220 20
+					 L220 220 L0 220 L0 20 Z"
+		fill="#0E0E0E"/>
+	<path d="M20 0 L200 0 L220 20
+					 L220 220 L0 220 L0 20 Z"
+		fill="none" stroke="#222" stroke-width="1"/>
+
+	<path d="M186 0 L220 0 L220 34 Z"
+		fill="url(#g)"/>
+
+	<line x1="0" y1="40" x2="220" y2="40"
+		stroke="#161616" stroke-width="0.5"/>
+	<line x1="0" y1="180" x2="220" y2="180"
+		stroke="#161616" stroke-width="0.5"/>
+	<line x1="40" y1="0" x2="40" y2="220"
+		stroke="#161616" stroke-width="0.5"/>
+	<line x1="180" y1="0" x2="180" y2="220"
+		stroke="#161616" stroke-width="0.5"/>
+
+	<text x="22" y="155"
+		font-family="'Arial Black',sans-serif"
+		font-size="130" font-weight="900"
+		fill="#FFFFFF" letter-spacing="-6"
+		clip-path="url(#sq)">R</text>
+	<text x="100" y="155"
+		font-family="'Arial Black',sans-serif"
+		font-size="130" font-weight="900"
+		fill="url(#g)" letter-spacing="-6"
+		clip-path="url(#sq)">S</text>
+
+	<rect x="22" y="168" width="80"
+		height="3" fill="url(#g)" rx="1.5"/>
+	<rect x="22" y="168" width="30"
+		height="3" fill="#00FFD1" rx="1.5"/>
+
+	<circle cx="198" cy="185" r="4"
+		fill="url(#g)"/>
+	<circle cx="198" cy="185" r="7"
+		fill="none" stroke="#00FFD1"
+		stroke-width="0.8" opacity="0.4"/>
+</svg>

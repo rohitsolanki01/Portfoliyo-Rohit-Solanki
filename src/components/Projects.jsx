@@ -5,62 +5,47 @@ const projects = [
   {
     year: '2026',
     title: 'StackMeet',
-    tagline: 'A developer networking platform with realtime collaboration',
-    description: 'A platform where engineers showcase their stack, discover collaborators, connect, and chat in real time. Includes JWT cookie auth, protected/public routes, secure password reset flow, explore feed filters, connection requests, accepted-connections graph, and Socket.IO chat with HTTP fallback.',
-    tech: ['React 19', 'Vite', 'Redux Toolkit', 'Node.js', 'Express 5', 'MongoDB', 'Mongoose', 'Socket.IO', 'Cloudinary', 'JWT'],
+    tagline: 'Developer networking platform with realtime collaboration',
+    description: 'A secure platform where engineers showcase their skills, discover collaborators, and collaborate in real time with instant messaging.',
+    problem: 'Developers struggle to find vetted collaborators and maintain meaningful professional connections. Traditional networking platforms lack technical depth and real-time collaboration features.',
+    approach: 'Built a profile-driven discovery platform with connection requests, real-time chat, and protected routes. Implemented JWT cookie authentication with secure password reset, feed filters, and connection graph tracking.',
+    result: 'Created a full-featured networking platform enabling developers to showcase stacks, discover collaborators by technology match, send connection requests, and chat instantly with HTTP fallback for reliability.',
+    tech: ['React 19', 'Vite', 'Redux Toolkit', 'Node.js', 'Express 5', 'MongoDB', 'Socket.IO', 'JWT', 'Cloudinary'],
     gradient: 'from-violet-600 via-purple-600 to-cyan-500',
     emoji: '🤝',
-    metrics: [{ label: 'Auth', value: 'JWT + Cookies' }, { label: 'Chat', value: 'Realtime 1:1' }, { label: 'Routing', value: 'Protected/Public' }],
+    metrics: [{ label: 'Realtime', value: 'Socket.IO' }, { label: 'Auth', value: 'JWT Cookies' }, { label: 'Routes', value: 'Protected' }],
     liveUrl: 'https://www.stackmeet.tech/',
     sourceUrl: 'https://github.com/rohitsolanki01/stackmeet',
   },
   {
     year: '2025',
     title: 'Tranquvest',
-    tagline: 'A full-stack trading platform with live market feeds',
-    description: 'A full-stack trading platform that allows users to buy and sell real stocks at live market prices with realtime market feeds.',
-    tech: ['React', 'Express', 'Node.js', 'MongoDB', 'Chart.js', 'Google Auth'],
+    tagline: 'Full-stack trading platform with live market feeds',
+    description: 'A polished trading interface combining real-time market data, interactive charts, and a complete buy/sell workflow with authentication.',
+    problem: 'Users need a responsive trading interface that displays live market prices, visualizes trends, and enables quick transactions—all with clean, modern UX.',
+    approach: 'Built a full-stack application with React frontend for responsive UI, Express backend for market data aggregation, Chart.js for data visualization, and Google Auth for seamless access.',
+    result: 'Delivered a professional trading platform demonstrating real-time UI updates, backend data flow architecture, finance-style interactions, and user authentication at scale.',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Chart.js', 'Google Auth', 'Vercel'],
     gradient: 'from-emerald-500 via-teal-500 to-cyan-500',
     emoji: '💵',
-    metrics: [{ label: 'Experience', value: 'Full-stack' }, { label: 'Prices', value: 'Live Market' }, { label: 'Charts', value: 'Realtime' }],
+    metrics: [{ label: 'Data', value: 'Live Market' }, { label: 'Charts', value: 'Real-time' }, { label: 'Auth', value: 'Google' }],
     liveUrl: 'https://treding-app-tranquvest.vercel.app/',
     sourceUrl: 'https://github.com/rohitsolanki01/Treding---app---Tranquvest',
   },
   {
     year: '2025',
     title: 'Nestigo',
-    tagline: 'A global vacation rental and booking platform',
-    description: 'A comprehensive vacation rental platform connecting travelers with unique accommodations worldwide, with secure booking and host management.',
-    tech: ['MongoDB', 'Express', 'EJS', 'Node.js', 'JWT', 'Bootstrap'],
+    tagline: 'Global vacation rental and booking platform',
+    description: 'Complete rental marketplace connecting travelers with unique accommodations worldwide, featuring dual-role authentication and secure transaction flows.',
+    problem: 'Travelers need a reliable platform to discover and book rentals with clear host information and secure payment. Hosts need tools to manage listings and bookings efficiently.',
+    approach: 'Designed a role-aware architecture with separate host and traveler flows. Implemented JWT authentication, listing management, secure booking workflows, and payment integration.',
+    result: 'Launched a full-featured vacation rental platform demonstrating complex user roles, authentication systems, booking state management, and a complete end-to-end booking experience.',
+    tech: ['MongoDB', 'Express', 'Node.js', 'EJS', 'JWT', 'Bootstrap', 'Render'],
     gradient: 'from-indigo-600 via-violet-600 to-fuchsia-500',
     emoji: '🌍',
-    metrics: [{ label: 'Platform', value: 'Rental + Booking' }, { label: 'Security', value: 'JWT Auth' }, { label: 'Roles', value: 'Host + Traveler' }],
+    metrics: [{ label: 'Roles', value: 'Host + Traveler' }, { label: 'Security', value: 'JWT' }, { label: 'Workflow', value: 'Booking' }],
     liveUrl: 'https://nestigo.onrender.com/',
     sourceUrl: 'https://github.com/rohitsolanki01/Nestigo',
-  },
-  {
-    year: '2024',
-    title: 'Weather Dashboard',
-    tagline: 'Realtime weather app with dynamic visual feedback',
-    description: 'Realtime weather application with dynamic backgrounds and detailed forecasts powered by the OpenWeather API.',
-    tech: ['React', 'OpenWeather API', 'Tailwind CSS', 'Responsive UI'],
-    gradient: 'from-sky-500 via-cyan-500 to-blue-600',
-    emoji: '🌤️',
-    metrics: [{ label: 'Data', value: 'Live Weather' }, { label: 'UX', value: 'Dynamic Backgrounds' }, { label: 'Design', value: 'Responsive' }],
-    liveUrl: '#',
-    sourceUrl: 'https://github.com/rohitsolanki01/Weather_App-',
-  },
-  {
-    year: '2024',
-    title: 'ShortIt',
-    tagline: 'A sleek URL shortener with analytics-ready link flows',
-    description: 'A URL shortening service with dual API support for instant short links and click analytics.',
-    tech: ['React', 'Tailwind CSS', 'API Integration'],
-    gradient: 'from-orange-500 via-amber-500 to-yellow-400',
-    emoji: '🔗',
-    metrics: [{ label: 'Links', value: 'Instant Shortening' }, { label: 'Insights', value: 'Click Analytics' }, { label: 'Support', value: 'Dual API' }],
-    liveUrl: 'https://short-it-kappa.vercel.app/',
-    sourceUrl: 'https://github.com/rohitsolanki01/ShortIt',
   },
 ]
 
@@ -137,14 +122,14 @@ export default function Projects() {
             <div className="flex items-center gap-3 mb-6">
               <span className="font-mono text-xs text-purple-400">03</span>
               <span className="h-px w-8 bg-purple-400/40" />
-              <span className="text-xs uppercase tracking-[0.3em] text-white/50">Selected Work</span>
+              <span className="text-xs uppercase tracking-[0.3em] text-white/50">Featured Case Studies</span>
             </div>
             <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-neutral-900 dark:text-white">
-              Projects I am{' '}
+              Selected{' '}
               <span className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text italic text-transparent dark:from-violet-400 dark:to-cyan-300">
-                proud
+                work
               </span>{' '}
-              of.
+              I am proud of.
             </h2>
           </div>
           <a href="#" className="text-sm text-neutral-500 hover:text-neutral-900 dark:text-white/60 dark:hover:text-white transition-colors flex items-center gap-2 font-mono" data-cursor="hover">
@@ -191,29 +176,56 @@ export default function Projects() {
               </button>
 
               <div className="p-8 md:p-10">
-                <div className="flex items-center gap-3 mb-4 text-xs font-mono text-white/50">
+                <div className="flex items-center gap-3 mb-6 text-xs font-mono text-white/50">
                   <span>{active.year}</span>
                   <span>·</span>
-                  <span>Case Study</span>
+                  <span className="text-purple-400">Case Study</span>
                 </div>
-                <h3 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-3">{active.title}</h3>
-                <p className="text-white/70 text-lg leading-relaxed mb-8">{active.description}</p>
+                <h3 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-2">{active.title}</h3>
+                <p className="text-white/60 mb-8 text-sm">{active.tagline}</p>
 
+                {/* Case Study Sections */}
+                <div className="space-y-6 mb-10">
+                  {/* Problem */}
+                  <div>
+                    <h4 className="text-sm font-mono uppercase tracking-wider text-purple-400 mb-2">Problem</h4>
+                    <p className="text-white/70 leading-relaxed text-sm">{active.problem}</p>
+                  </div>
+
+                  {/* Approach */}
+                  <div>
+                    <h4 className="text-sm font-mono uppercase tracking-wider text-cyan-400 mb-2">Approach</h4>
+                    <p className="text-white/70 leading-relaxed text-sm">{active.approach}</p>
+                  </div>
+
+                  {/* Result */}
+                  <div>
+                    <h4 className="text-sm font-mono uppercase tracking-wider text-emerald-400 mb-2">Result</h4>
+                    <p className="text-white/70 leading-relaxed text-sm">{active.result}</p>
+                  </div>
+                </div>
+
+                {/* Metrics Grid */}
                 <div className="grid grid-cols-3 gap-4 mb-8">
                   {active.metrics.map((m) => (
                     <div key={m.label} className="glass rounded-2xl p-4">
-                      <div className="font-display text-2xl font-bold gradient-text">{m.value}</div>
+                      <div className="font-display text-lg md:text-xl font-bold gradient-text">{m.value}</div>
                       <div className="text-xs uppercase tracking-wider text-white/50 mt-1">{m.label}</div>
                     </div>
                   ))}
                 </div>
 
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {active.tech.map((t) => (
-                    <span key={t} className="text-xs px-3 py-1.5 rounded-md glass text-white/70 font-mono">{t}</span>
-                  ))}
+                {/* Tech Stack */}
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-wider text-white/50 mb-3">Tech Stack</p>
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {active.tech.map((t) => (
+                      <span key={t} className="text-xs px-3 py-1.5 rounded-md glass text-white/70 font-mono">{t}</span>
+                    ))}
+                  </div>
                 </div>
 
+                {/* CTA Buttons */}
                 <div className="flex gap-3 flex-wrap">
                   {active.liveUrl && active.liveUrl !== '#' ? (
                     <a
@@ -223,7 +235,7 @@ export default function Projects() {
                       className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-colors"
                       data-cursor="hover"
                     >
-                      Visit live
+                      View Live
                       <span>→</span>
                     </a>
                   ) : (
@@ -240,7 +252,7 @@ export default function Projects() {
                       className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-strong text-sm font-medium hover:bg-white/10 transition-colors"
                       data-cursor="hover"
                     >
-                      Source code
+                      Source Code
                     </a>
                   ) : (
                     <span className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass-strong text-sm font-medium text-white/60 cursor-not-allowed">

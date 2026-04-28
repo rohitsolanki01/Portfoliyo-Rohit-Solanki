@@ -32,11 +32,11 @@ export default function Navbar({ onCmdOpen }) {
           data-cursor="hover"
           className="group flex items-center gap-2.5 rounded-xl px-2 py-1"
         >
-          <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-black p-1.5 shadow-lg shadow-cyan-500/20 ring-1 ring-cyan-300/50 dark:ring-cyan-300/40">
+          <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-black p-1 shadow-lg shadow-cyan-500/20 ring-1 ring-cyan-300/50 dark:ring-cyan-300/40 md:h-12 md:w-12">
             <img
-              src="/logo1.svg"
+              src="/logo.svg"
               alt="Rohit logo"
-              className="h-full w-full scale-[2.4] object-contain object-center brightness-110 contrast-125 saturate-125"
+              className="h-full w-full object-contain object-center brightness-110 contrast-125 saturate-125"
             />
           </span>
         </a>

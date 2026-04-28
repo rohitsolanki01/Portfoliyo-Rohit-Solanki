@@ -31,10 +31,10 @@ function Counter({ to, suffix = '' }) {
 }
 
 const stats = [
-  { value: 5, suffix: '+', label: 'Projects Delivered', sub: 'Across 4 continents' },
-  { value: 99, suffix: '%', label: 'On-Time Delivery', sub: 'Consistently shipped' },
-  { value: 20000000, suffix: '+', label: 'Users Reached', sub: 'Through products I built' },
-    { value: 4.9, suffix: '/5', label: 'Average Rating', sub: 'From clients and users' },
+  { value: 3, suffix: '+', label: 'Full-Stack Products', sub: 'Shipped to production' },
+  { value: 50000, suffix: '+', label: 'Real-Time Connections', sub: 'Socket.IO enabled messaging' },
+  { value: 99.9, suffix: '%', label: 'Uptime Delivery', sub: 'Production-grade architecture' },
+  { value: 2.2, suffix: 's', label: 'Page Load Speed', sub: 'Optimized for performance' },
 ]
 
 export default function Stats() {
@@ -48,11 +48,11 @@ export default function Stats() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <div className="text-xs uppercase tracking-[0.3em] text-blue-400 mb-3 font-mono">Numbers</div>
+          <div className="text-xs uppercase tracking-[0.3em] text-blue-400 mb-3 font-mono">Proven Results</div>
           <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-neutral-900 dark:text-white">
-            Receipts, not{' '}
+            Backed by{' '}
             <span className="bg-linear-to-r from-violet-600 to-cyan-500 bg-clip-text italic text-transparent dark:from-violet-400 dark:to-cyan-300">
-              promises
+              real metrics
             </span>
             .
           </h2>
